@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mendham Golf - Login & Intro</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body, html {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            background-color: #1a1a1a;
+            color: white;
+        }
+
+        /* Full Screen Containers */
+        .full-screen-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-size: cover;
+            background-position: center;
+            transition: opacity 0.5s ease;
+        }
+
+        /* Background Images */
+        #landing-page { background-image: url('Approach_01_After.jpg'); z-index: 3; }
+        #intro-page-1 { background-image: url('Photo_01.jpg'); z-index: 2; display: none; }
+        #intro-page-2 { background-image: url('Photo_02.jpg'); z-index: 1; display: none; }
+
+        /* Dark Overlay */
+        .full-screen-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+
+        .content-box {
+            position: relative;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+            color: #333;
+        }
+
+        .content-box h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 28px;
+            border-bottom: 2px solid #27ae60;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .content-box p {
+            line-height: 1.6;
+            margin-bottom: 25px;
+            font-size: 16px;
+            color: #444;
+        }
+
+        /* Inputs & Buttons */
+        .input-group {
+            margin-bottom: 20px;
+            max-width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        button.action-btn {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+            min-width: 150px;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+
+        button.action-btn:hover {
+            background-color: #219150;
+        }
+
+        .error-msg {
+            color: #c0392b;
+            font-size: 14px;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. LOGIN PAGE -->
+    <div id="landing-page" class="full-screen-bg">
+        <div class="content-box">
+            <div style="margin-bottom: 20px;">
+                <h1>Mendham Golf & Tennis</h1>
+                <p style="color: #666; margin-bottom: 10px;">Hole 10 Improvement Plan</p>
+            </div>
+            
+            <div class="input-group">
+                <input type="password" id="passwordInput" placeholder="Enter Password">
+                <p class="error-msg" id="errorMsg">Incorrect password. Please try again.</p>
+            </div>
+            <button class="action-btn" onclick="checkLogin()">Login</button>
+        </div>
+    </div>
+
+    <!-- 2. INTRO PART 1 -->
+    <div id="intro-page-1" class="full-screen-bg">
+        <div class="content-box">
+            <h1>The 2021 Master Plan</h1>
+            <p>
+                In 2021 the Mendham Golf & Tennis Club approved a master plan, presented by Robert McNeil, ASGCA, of the Northeast Golf Company. 
+                Robert McNeil, alongside contractors at NMP Golf, have now completed nearly all of the proposed improvements to the course.
+            </p>
+            <button class="action-btn" onclick="nextIntro()">Continue</button>
+        </div>
+    </div>
+
+    <!-- 3. INTRO PART 2 -->
+    <div id="intro-page-2" class="full-screen-bg">
+        <div class="content-box">
+            <h1>Hole 10 Improvements</h1>
+            <p>
+                One of the major projects that has yet to be completed is the work on the 10th hole, improving the par 5's aesthetics, strategy, agronomy, and playability. 
+                This interactive guide explains the proposed enhancements to the 10th hole, along with the planning and goals that have guided these proposals.
+            </p>
+            <!-- This button links to the second HTML file -->
+            <button class="action-btn" onclick="goToMap()">Continue</button>
+        </div>
+    </div>
+
+    <script>
+        function checkLogin() {
+            const pass = document.getElementById('passwordInput').value;
+            const error = document.getElementById('errorMsg');
+            const landing = document.getElementById('landing-page');
+            const intro1 = document.getElementById('intro-page-1');
+
+            if (pass === "password") {
+                landing.style.opacity = '0';
+                setTimeout(() => {
+                    landing.style.display = 'none';
+                    intro1.style.display = 'flex';
+                    // Trigger reflow for transition
+                    intro1.style.opacity = '0';
+                    setTimeout(() => intro1.style.opacity = '1', 50);
+                }, 500);
+            } else {
+                error.style.display = 'block';
+                const container = document.querySelector('#landing-page .content-box');
+                container.style.transform = 'translateX(10px)';
+                setTimeout(() => container.style.transform = 'translateX(-10px)', 100);
+                setTimeout(() => container.style.transform = 'translateX(0)', 200);
+            }
+        }
+
+        function nextIntro() {
+            const intro1 = document.getElementById('intro-page-1');
+            const intro2 = document.getElementById('intro-page-2');
+
+            intro1.style.opacity = '0';
+            setTimeout(() => {
+                intro1.style.display = 'none';
+                intro2.style.display = 'flex';
+                intro2.style.opacity = '0';
+                setTimeout(() => intro2.style.opacity = '1', 50);
+            }, 500);
+        }
+
+        function goToMap() {
+            const body = document.body;
+            body.style.opacity = '0';
+            body.style.transition = 'opacity 0.5s ease';
+            setTimeout(() => {
+                // Redirect to the second file
+                window.location.href = 'map.html';
+            }, 500);
+        }
+
+        document.getElementById('passwordInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') checkLogin();
+        });
+    </script>
+</body>
+</html>
