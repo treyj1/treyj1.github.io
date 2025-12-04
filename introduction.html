@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mendham Golf - Introduction</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body, html {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            background-color: #1a1a1a;
+            /* Fade in on load */
+            animation: fadeInPage 0.5s ease;
+        }
+
+        @keyframes fadeInPage {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .full-screen-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-size: cover;
+            background-position: center;
+            transition: opacity 0.5s ease;
+        }
+
+        /* Background Images */
+        #intro-part-1 { background-image: url('Photo_01.jpg'); z-index: 2; }
+        #intro-part-2 { background-image: url('Photo_02.jpg'); z-index: 1; display: none; }
+
+        .full-screen-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+
+        .content-box {
+            position: relative;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+            color: #333;
+        }
+
+        .content-box h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 28px;
+            border-bottom: 2px solid #27ae60;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .content-box p {
+            line-height: 1.6;
+            margin-bottom: 30px;
+            font-size: 16px;
+            color: #444;
+        }
+
+        button.action-btn {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+            min-width: 150px;
+        }
+
+        button.action-btn:hover {
+            background-color: #219150;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Intro Part 1 -->
+    <div id="intro-part-1" class="full-screen-bg">
+        <div class="content-box">
+            <h1>The 2021 Master Plan</h1>
+            <p>
+                In 2021 the Mendham Golf & Tennis Club approved a master plan, presented by Robert McNeil, ASGCA, of the Northeast Golf Company. 
+                Robert McNeil, alongside contractors at NMP Golf, have now completed nearly all of the proposed improvements to the course.
+            </p>
+            <button class="action-btn" onclick="nextSlide()">Continue</button>
+        </div>
+    </div>
+
+    <!-- Intro Part 2 -->
+    <div id="intro-part-2" class="full-screen-bg">
+        <div class="content-box">
+            <h1>Hole 10 Improvements</h1>
+            <p>
+                One of the major projects that has yet to be completed is the work on the 10th hole, improving the par 5's aesthetics, strategy, agronomy, and playability. 
+                This interactive guide explains the proposed enhancements to the 10th hole, along with the planning and goals that have guided these proposals.
+            </p>
+            <button class="action-btn" onclick="finishIntro()">Continue</button>
+        </div>
+    </div>
+
+    <script>
+        function nextSlide() {
+            const part1 = document.getElementById('intro-part-1');
+            const part2 = document.getElementById('intro-part-2');
+
+            // Fade out part 1
+            part1.style.opacity = '0';
+            
+            setTimeout(() => {
+                part1.style.display = 'none';
+                part2.style.display = 'flex';
+                // Trigger reflow
+                part2.offsetHeight; 
+                // Set opacity for fade in if needed, or rely on display flex
+                // (CSS transition handles opacity change if set correctly, but simple display switch is robust)
+            }, 500);
+        }
+
+        function finishIntro() {
+            const body = document.body;
+            body.style.opacity = '0';
+            body.style.transition = 'opacity 0.5s ease';
+
+            setTimeout(() => {
+                // Redirect to the Main Slider page
+                window.location.href = 'index.html';
+            }, 500);
+        }
+    </script>
+</body>
+</html>
