@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mendham Golf - Flag Detail</title>
+    <!-- Import the model-viewer component -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body, html {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            background-color: #1a1a1a;
+            color: white;
+        }
+
+        /* Header */
+        .site-header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 20px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+            pointer-events: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-header h2 {
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            pointer-events: auto;
+            margin-left: 20px;
+        }
+
+        .nav-links {
+            pointer-events: auto;
+            display: flex;
+            gap: 10px;
+            margin-right: 20px;
+        }
+
+        .back-link {
+            color: white;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: background 0.3s;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* 3D Viewer Container */
+        #model-container {
+            width: 100%;
+            height: 100%;
+            /* Lighter gradient for the flag to stand out */
+            background: radial-gradient(circle at center, #546e7a 0%, #263238 100%);
+            position: relative;
+        }
+
+        model-viewer {
+            width: 100%;
+            height: 100%;
+            --poster-color: transparent;
+        }
+
+        /* Instructions Overlay */
+        .controls-instruction {
+            position: absolute;
+            bottom: 30px;
+            width: 100%;
+            text-align: center;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .controls-instruction p {
+            background: rgba(0,0,0,0.6);
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            color: #ddd;
+            font-size: 14px;
+        }
+
+        /* Error Message Style */
+        .error-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #ff6b6b;
+            background: rgba(0,0,0,0.9);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 80%;
+            display: none; 
+            border: 1px solid #ff6b6b;
+            z-index: 500;
+        }
+        .error-overlay h3 { margin-bottom: 10px; }
+        .error-overlay p { color: #ccc; font-size: 14px; margin-bottom: 5px; }
+    </style>
+</head>
+<body>
+
+    <div class="site-header">
+        <h2>Custom Golf Flag</h2>
+        <div class="nav-links">
+            <!-- Link back to the main map -->
+            <a href="index.html" class="back-link">Home</a>
+            <!-- Link to the hole 3D view -->
+            <a href="3d_view.html" class="back-link">Hole 10 View</a>
+        </div>
+    </div>
+
+    <div id="model-container">
+        <!-- 
+             Note the src is pointing to the .glb version
+        -->
+        <model-viewer 
+            src="Golf_Flag_1.glb" 
+            alt="Custom Golf Flag Design" 
+            camera-controls 
+            auto-rotate 
+            shadow-intensity="1" 
+            exposure="1"
+            shadow-softness="1">
+            
+            <!-- Simple loader -->
+            <div slot="progress-bar"></div>
+
+        </model-viewer>
+
+        <!-- Error Message container -->
+        <div id="error-msg" class="error-overlay">
+            <h3>&#9888; Error Loading Model</h3>
+            <p>Could not load "Golf_Flag_1.glb".</p>
+            <p><strong>Did you convert the file?</strong></p>
+            <ul style="text-align: left; font-size: 13px; color: #aaa; margin-top: 10px;">
+                <li>Web browsers cannot read .fbx files. You must convert it to .glb first.</li>
+                <li>Make sure the file name is exactly <code>Golf_Flag_1.glb</code>.</li>
+                <li>If using GitHub, ensure you uploaded it using LFS.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="controls-instruction">
+        <p>Click & Drag to Rotate &bull; Scroll to Zoom</p>
+    </div>
+
+    <script>
+        const modelViewer = document.querySelector('model-viewer');
+        const errorOverlay = document.getElementById('error-msg');
+
+        // Error Handling
+        modelViewer.addEventListener('error', (event) => {
+            console.error("Error loading model:", event);
+            errorOverlay.style.display = 'block'; 
+        });
+    </script>
+</body>
+</html>
