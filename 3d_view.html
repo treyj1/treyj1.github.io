@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mendham Golf - 3D Model View</title>
+    <!-- Import the model-viewer component -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body, html {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            background-color: #1a1a1a;
+            color: white;
+        }
+
+        /* Header */
+        .site-header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 20px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+            pointer-events: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-header h2 {
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            pointer-events: auto;
+            margin-left: 20px;
+        }
+
+        .back-link {
+            pointer-events: auto;
+            color: white;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            margin-right: 20px;
+            transition: background 0.3s;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* 3D Viewer Container */
+        #model-container {
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, #2c3e50 0%, #1a1a1a 100%);
+            position: relative;
+        }
+
+        model-viewer {
+            width: 100%;
+            height: 100%;
+            --poster-color: transparent;
+        }
+
+        /* Instructions Overlay */
+        .controls-instruction {
+            position: absolute;
+            bottom: 30px;
+            width: 100%;
+            text-align: center;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .controls-instruction p {
+            background: rgba(0,0,0,0.6);
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            color: #ddd;
+            font-size: 14px;
+        }
+
+        /* Loading Bar */
+        .progress-bar {
+            display: block;
+            width: 33%;
+            height: 10%;
+            max-height: 2px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate3d(-50%, -50%, 0);
+            border-radius: 25px;
+            box-shadow: 0px 3px 10px 3px rgba(0, 0, 0, 0.5), 0px 0px 5px 1px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+    
+        .progress-bar.hide {
+            visibility: hidden;
+            transition: visibility 0.3s;
+        }
+    
+        .update-bar {
+            background-color: rgba(255, 255, 255, 0.9);
+            width: 0%;
+            height: 100%;
+            border-radius: 25px;
+            float: left;
+            transition: width 0.3s;
+        }
+
+        /* Error Message Style */
+        .error-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #ff6b6b;
+            background: rgba(0,0,0,0.9);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 80%;
+            display: none; /* Hidden by default */
+            border: 1px solid #ff6b6b;
+            z-index: 500;
+        }
+        .error-overlay h3 { margin-bottom: 10px; }
+        .error-overlay p { color: #ccc; font-size: 14px; margin-bottom: 5px; }
+    </style>
+</head>
+<body>
+
+    <div class="site-header">
+        <h2>Hole 10 - 3D Model</h2>
+        <a href="index.html" class="back-link">Back to Plan</a>
+    </div>
+
+    <div id="model-container">
+        <!-- 
+             src: The path to your .glb file
+             camera-controls: Enables mouse/touch interaction
+             auto-rotate: Slowly spins the model when idle
+             shadow-intensity: Adds realistic shadows 
+             exposure: Adjusts lighting brightness
+        -->
+        <model-viewer 
+            src="Mendham_3D.glb" 
+            alt="3D Model of Hole 10 Improvements" 
+            camera-controls 
+            auto-rotate 
+            shadow-intensity="1"
+            exposure="1"
+            shadow-softness="1">
+            
+            <div class="progress-bar hide" slot="progress-bar">
+                <div class="update-bar"></div>
+            </div>
+
+        </model-viewer>
+
+        <!-- Error Message container -->
+        <div id="error-msg" class="error-overlay">
+            <h3>&#9888; Error Loading Model</h3>
+            <p>Could not load "Mendham_3D.glb".</p>
+            <p><strong>Possible Reasons:</strong></p>
+            <ul style="text-align: left; font-size: 13px; color: #aaa; margin-top: 10px;">
+                <li>The file is missing from this folder.</li>
+                <li>The filename is spelled differently (case-sensitive).</li>
+                <li><strong>Browser Security:</strong> If you opened this file directly from your desktop, browsers block 3D files. Please try running it via a Local Server or upload it to GitHub.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="controls-instruction">
+        <p>Click & Drag to Rotate &bull; Scroll to Zoom</p>
+    </div>
+
+    <script>
+        const modelViewer = document.querySelector('model-viewer');
+        const progress = document.querySelector('.progress-bar');
+        const bar = document.querySelector('.update-bar');
+        const errorOverlay = document.getElementById('error-msg');
+
+        // Progress Bar
+        modelViewer.addEventListener('progress', (event) => {
+            const {totalProgress} = event.detail;
+            progress.classList.remove('hide');
+            bar.style.width = `${totalProgress * 100}%`;
+
+            if (totalProgress === 1) {
+                progress.classList.add('hide');
+            }
+        });
+
+        // Error Handling
+        modelViewer.addEventListener('error', (event) => {
+            console.error("Error loading model:", event);
+            progress.classList.add('hide'); // Hide progress bar
+            errorOverlay.style.display = 'block'; // Show error message
+        });
+    </script>
+</body>
+</html>
