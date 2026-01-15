@@ -29,53 +29,18 @@
         }
     </script>
     <style>
-        body {
-            margin: 0;
-            background-color: #000;
-            color: #fff;
-            overflow-x: hidden;
-        }
-        ::selection {
-            background: #7f1d1d;
-            color: white;
-        }
-        .nav-transition {
-            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .header-logo {
-            height: 40px;
-            width: 40px;
-            object-fit: cover;
-            border-radius: 9999px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        input[type="range"] {
-            -webkit-appearance: none;
-            width: 100%;
-            background: transparent;
-        }
-        input[type="range"]::-webkit-slider-runnable-track {
-            width: 100%;
-            height: 2px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 2px;
-        }
+        body { margin: 0; background-color: #000; color: #fff; overflow-x: hidden; }
+        ::selection { background: #7f1d1d; color: white; }
+        .nav-transition { transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1); }
+        .header-logo { height: 40px; width: 40px; object-fit: cover; border-radius: 9999px; border: 1px solid rgba(255, 255, 255, 0.2); }
+        input[type="range"] { -webkit-appearance: none; width: 100%; background: transparent; }
+        input[type="range"]::-webkit-slider-runnable-track { width: 100%; height: 2px; background: rgba(255, 255, 255, 0.1); border-radius: 2px; }
         input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            height: 24px;
-            width: 24px;
-            border-radius: 50%;
-            background: #b91c1c; /* red-700 */
-            cursor: pointer;
-            margin-top: -11px;
-            border: 4px solid #000;
-            box-shadow: 0 0 10px rgba(185, 28, 28, 0.5);
-            transition: all 0.3s ease;
+            -webkit-appearance: none; height: 24px; width: 24px; border-radius: 50%;
+            background: #b91c1c; cursor: pointer; margin-top: -11px; border: 4px solid #000;
+            box-shadow: 0 0 10px rgba(185, 28, 28, 0.5); transition: all 0.3s ease;
         }
-        input[type="range"]:active::-webkit-slider-thumb {
-            transform: scale(1.2);
-            background: #ef4444;
-        }
+        input[type="range"]:active::-webkit-slider-thumb { transform: scale(1.2); background: #ef4444; }
     </style>
 </head>
 <body class="font-urbanist bg-neutral-950">
@@ -85,9 +50,9 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
         <div class="flex flex-col items-center gap-10">
-            <a href="index.html" class="text-4xl font-marcellus uppercase tracking-widest hover:text-red-700 transition-colors mobile-link">Home</a>
-            <a href="holes.html" class="text-4xl font-marcellus uppercase tracking-widest hover:text-red-700 transition-colors mobile-link">Signature Holes</a>
-            <a href="apply.html" class="text-4xl font-marcellus uppercase tracking-widest text-red-700 mobile-link">How to Play</a>
+            <a href="index.html" class="text-4xl font-marcellus uppercase tracking-widest hover:text-red-700 transition-colors">Home</a>
+            <a href="holes.html" class="text-4xl font-marcellus uppercase tracking-widest hover:text-red-700 transition-colors">Signature Holes</a>
+            <a href="apply.html" class="text-4xl font-marcellus uppercase tracking-widest text-red-700">How to Play</a>
         </div>
     </div>
 
@@ -96,17 +61,13 @@
             <div class="flex items-center gap-4">
                 <a href="index.html" class="flex items-center gap-4">
                     <img src="Logo.jpg" alt="Logo" class="header-logo" onerror="this.src='https://images.unsplash.com/photo-1535131749006-b7f58c99034b?q=80&w=200&auto=format&fit=crop'">
-                    <span class="text-xl font-medium tracking-[0.2em] uppercase font-marcellus text-white">
-                        The National <span class="text-red-700">3</span>
-                    </span>
+                    <span class="text-xl font-medium tracking-[0.2em] uppercase font-marcellus text-white">The National <span class="text-red-700">3</span></span>
                 </a>
             </div>
-
             <div class="hidden md:flex items-center gap-10">
                 <a href="index.html" class="text-[10px] font-bold uppercase tracking-[0.3em] text-white hover:opacity-50 transition-all">Back Home</a>
                 <a href="holes.html" class="text-[10px] font-bold uppercase tracking-[0.3em] text-white hover:opacity-50 transition-all">Signature Holes</a>
             </div>
-
             <button id="open-menu" class="md:hidden text-white">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
             </button>
@@ -118,9 +79,7 @@
             <div class="text-center mb-20">
                 <span class="text-[10px] font-bold text-red-700 uppercase tracking-[0.6em] mb-4 block">Player Information</span>
                 <h1 class="text-6xl md:text-7xl font-marcellus uppercase text-white tracking-tight mb-6">PROVE YOUR PAR 3 MASTERY</h1>
-                <p class="text-white/40 font-light leading-loose text-sm uppercase tracking-widest max-w-xl mx-auto">
-                    The National 3 field will consist of invitationals and qualifiers. To receive the most up to date information regarding qualifying and other player information, sign up below!
-                </p>
+                <p class="text-white/40 font-light leading-loose text-sm uppercase tracking-widest max-w-xl mx-auto">The National 3 field will consist of invitationals and qualifiers. Sign up below for correspondence.</p>
             </div>
 
             <form id="apply-form" class="space-y-12">
@@ -136,80 +95,46 @@
 
                 <div class="py-8">
                     <div class="flex justify-between items-end mb-8">
-                        <label class="text-[9px] font-bold text-white/40 uppercase tracking-[0.4em] max-w-[250px]">
-                            How confident are you that you are the best par 3 golfer in the country?
-                        </label>
+                        <label class="text-[9px] font-bold text-white/40 uppercase tracking-[0.4em] max-w-[250px]">Confidence Level</label>
                         <span id="confidence-value" class="text-5xl font-marcellus text-red-700">50%</span>
                     </div>
                     <input type="range" id="confidence-slider" min="0" max="100" value="50" class="cursor-pointer">
-                    <div class="flex justify-between mt-4">
-                        <span class="text-[8px] font-bold text-white/20 uppercase tracking-widest">Contender</span>
-                        <span class="text-[8px] font-bold text-white/20 uppercase tracking-widest">Unquestionable Master</span>
-                    </div>
                 </div>
 
                 <div class="pt-10 flex flex-col items-center">
-                    <button type="submit" class="w-full md:w-auto px-20 py-5 rounded-sm bg-white text-neutral-900 text-xs font-bold uppercase tracking-[0.4em] hover:bg-red-700 hover:text-white transition-all transform hover:-translate-y-1">
+                    <button type="submit" id="submit-btn" class="w-full md:w-auto px-20 py-5 rounded-sm bg-white text-neutral-900 text-xs font-bold uppercase tracking-[0.4em] hover:bg-red-700 hover:text-white transition-all transform hover:-translate-y-1">
                         Request Information
                     </button>
-                    <p class="mt-8 text-[8px] font-bold text-white/20 uppercase tracking-widest">Qualifying schedules will be shared via secure correspondence.</p>
                 </div>
             </form>
         </div>
-
-        <footer class="mt-48 flex flex-col items-center pt-20 border-t border-white/5">
-            <img src="Logo.jpg" alt="Logo" class="header-logo mb-12 opacity-40" onerror="this.src='https://images.unsplash.com/photo-1535131749006-b7f58c99034b?q=80&w=200&auto=format&fit=crop'">
-            <div class="flex gap-14 mb-10">
-                <a href="index.html" class="text-white/20 hover:text-red-700 transition-colors text-[9px] font-bold uppercase tracking-[0.5em]">Home</a>
-                <a href="holes.html" class="text-white/20 hover:text-red-700 transition-colors text-[9px] font-bold uppercase tracking-[0.5em]">The Holes</a>
-            </div>
-            <p class="text-white/5 text-[9px] font-bold uppercase tracking-[1em]">Excellence Defined · 2026</p>
-        </footer>
     </main>
 
     <script>
-        // --- LIVE CONFIGURATION ---
+        // Web App URL Configuration
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz17GcxGWyDS_mlz_s3Rz20J7U7xa8H9HDpP6neG4xhB7FVPhA2IiqrkMeVtyGqXYxxQg/exec';
 
-        // Slider Dynamic Display
+        // Slider Display logic
         const slider = document.getElementById('confidence-slider');
         const display = document.getElementById('confidence-value');
-
         slider.addEventListener('input', (e) => {
-            const val = e.target.value;
-            display.innerText = val + '%';
-            
-            if (val > 80) {
-                display.classList.replace('text-red-700', 'text-red-500');
-            } else {
-                display.classList.add('text-red-700');
-                display.classList.remove('text-red-500');
-            }
+            display.innerText = e.target.value + '%';
         });
 
-        // Mobile Menu
+        // Mobile Menu Logic
         const mobileMenu = document.querySelector('#mobile-menu');
-        const openMenuBtn = document.querySelector('#open-menu');
-        const closeMenuBtn = document.querySelector('#close-menu');
+        document.querySelector('#open-menu').addEventListener('click', () => mobileMenu.style.transform = "translateX(0)");
+        document.querySelector('#close-menu').addEventListener('click', () => mobileMenu.style.transform = "translateX(100%)");
 
-        openMenuBtn.addEventListener('click', () => {
-            mobileMenu.style.transform = "translateX(0)";
-        });
-
-        closeMenuBtn.addEventListener('click', () => {
-            mobileMenu.style.transform = "translateX(100%)";
-        });
-
-        // Form Submission Logic
+        // Submission Logic
         const form = document.getElementById('apply-form');
         form.addEventListener('submit', (e) => {
             e.preventDefault();
-            const btn = form.querySelector('button');
-            
-            btn.innerText = "Transmitting Request...";
+            const btn = document.getElementById('submit-btn');
+            btn.innerText = "Transmitting...";
             btn.disabled = true;
 
-            const formData = {
+            const payload = {
                 name: document.getElementById('player-name').value,
                 email: document.getElementById('player-email').value,
                 confidence: document.getElementById('confidence-slider').value
@@ -217,25 +142,20 @@
 
             fetch(SCRIPT_URL, {
                 method: 'POST',
-                mode: 'no-cors', 
-                cache: 'no-cache',
+                mode: 'no-cors', // Essential for Google Scripts
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
+                body: JSON.stringify(payload)
             })
             .then(() => {
                 form.innerHTML = `
                     <div class="text-center py-20 animate-pulse">
                         <h2 class="text-4xl font-marcellus text-red-700 uppercase mb-4">Request Received</h2>
-                        <p class="text-white/40 tracking-widest uppercase text-xs leading-loose">
-                            Your information request has been logged.<br>
-                            Qualifying details will be sent to your inbox shortly.
-                        </p>
-                    </div>
-                `;
+                        <p class="text-white/40 tracking-widest uppercase text-xs leading-loose">The National 3 has logged your request.</p>
+                    </div>`;
             })
-            .catch(error => {
-                console.error('Submission Error:', error);
-                btn.innerText = "Connection Error - Retry";
+            .catch(err => {
+                console.error(err);
+                btn.innerText = "Error - Try Again";
                 btn.disabled = false;
             });
         });
