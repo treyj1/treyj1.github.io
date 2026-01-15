@@ -37,7 +37,7 @@
             overflow-x: hidden;
         }
         #zoom-unit {
-            will-change: transform;
+            will-change: transform, opacity;
             transform-origin: center center;
         }
         .zoom-text {
@@ -76,7 +76,7 @@
         </button>
         <div class="flex flex-col items-center gap-10">
             <a href="index.html" class="text-4xl font-marcellus uppercase tracking-widest hover:text-red-700 transition-colors mobile-link">Home</a>
-            <a href="holes.html" class="text-4xl font-marcellus uppercase tracking-widest hover:text-red-700 transition-colors mobile-link">Signature Holes</a>
+            <a href="holes.html" class="hidden text-4xl font-marcellus uppercase tracking-widest hover:text-red-700 transition-colors mobile-link">Signature Holes</a>
             <a href="#event" class="text-4xl font-marcellus uppercase tracking-widest hover:text-red-700 transition-colors mobile-link">The Event</a>
             <a href="https://club9golf.com" target="_blank" class="text-4xl font-marcellus uppercase tracking-widest hover:text-red-700 transition-colors mobile-link">Club9</a>
             <a href="apply.html" class="mt-8 px-12 py-4 rounded-sm text-sm font-bold uppercase tracking-[0.3em] bg-white text-neutral-900 mobile-link">How to Play</a>
@@ -97,7 +97,7 @@
 
             <div class="hidden md:flex items-center gap-10">
                 <a href="#event" class="text-[10px] font-bold uppercase tracking-[0.3em] text-white hover:opacity-50 transition-all nav-link">The Event</a>
-                <a href="holes.html" class="text-[10px] font-bold uppercase tracking-[0.3em] text-white hover:opacity-50 transition-all nav-link">The Holes</a>
+                <a href="holes.html" class="hidden text-[10px] font-bold uppercase tracking-[0.3em] text-white hover:opacity-50 transition-all nav-link">The Holes</a>
                 <a href="https://club9golf.com" target="_blank" class="text-[10px] font-bold uppercase tracking-[0.3em] text-white hover:opacity-50 transition-all nav-link">Club9</a>
                 <a href="apply.html" class="px-8 py-2.5 rounded-sm text-[10px] font-bold uppercase tracking-[0.3em] bg-white text-neutral-900 transition-all transform hover:translate-y-[-2px] nav-btn inline-block">
                     How to Play
@@ -171,7 +171,7 @@
                             </div>
                             <h1 id="main-title" class="zoom-text text-7xl md:text-[10rem] font-normal text-white leading-[1] uppercase tracking-tighter font-marcellus">
                                 Identify the <br />
-                                <span class="text-red-700">Best.</span>
+                                <span class="text-red-700">Best</span>
                             </h1>
                         </div>
 
@@ -243,7 +243,7 @@
             </div>
 
             <div class="flex flex-wrap justify-center gap-14 mb-20">
-                <a href="holes.html" class="text-white/30 hover:text-red-800 transition-colors text-[9px] font-bold uppercase tracking-[0.5em]">The Venue</a>
+                <a href="holes.html" class="hidden text-white/30 hover:text-red-800 transition-colors text-[9px] font-bold uppercase tracking-[0.5em]">The Venue</a>
                 <a href="#event" class="text-white/30 hover:text-red-800 transition-colors text-[9px] font-bold uppercase tracking-[0.5em]">The Event</a>
                 <a href="https://club9golf.com" target="_blank" class="text-white/30 hover:text-red-800 transition-colors text-[9px] font-bold uppercase tracking-[0.5em]">Club9</a>
                 <a href="apply.html" class="text-white/30 hover:text-red-800 transition-colors text-[9px] font-bold uppercase tracking-[0.5em]">How to Play</a>
@@ -253,7 +253,7 @@
     </main>
 
     <script>
-        // Force scroll to top on refresh
+        // Set manual scroll restoration so it doesn't jump on reload
         if (history.scrollRestoration) {
             history.scrollRestoration = 'manual';
         }
@@ -272,51 +272,60 @@
         const closeMenuBtn = document.querySelector('#close-menu');
         const mobileLinks = document.querySelectorAll('.mobile-link');
 
-        // Initial hidden states
+        // Initial setup
         gsap.set(revealLayer, { autoAlpha: 0, pointerEvents: "none" });
         gsap.set(heroLayer, { autoAlpha: 1, pointerEvents: "auto" });
+        gsap.set(zoomUnit, { scale: 1, autoAlpha: 1 });
 
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: scrollContainer,
                 start: "top top",
                 end: "bottom bottom",
-                scrub: true,
-                invalidateOnRefresh: true
+                scrub: 1,
+                invalidateOnRefresh: true,
+                onUpdate: (self) => {
+                    // RESET OPTION WITH 60% THRESHOLD:
+                    // If scrolling UP and we cross below the 60% mark, reload.
+                    if (self.direction === -1 && self.progress < 0.60) {
+                        window.location.reload();
+                    }
+                }
             }
         });
 
-        // 1. Scale the lens
-        tl.to(zoomUnit, {
-            scale: 85,
-            ease: "power1.in",
-            force3D: true,
-            duration: 1
-        }, 0);
+        // 1. Zoom and fade out the lens unit
+        tl.fromTo(zoomUnit, 
+            { scale: 1, autoAlpha: 1 }, 
+            {
+                scale: 85,
+                autoAlpha: 0,
+                ease: "power2.in",
+                force3D: true,
+                duration: 1
+            }, 0);
 
-        // 2. Fade out scroll prompt
+        // 2. Fade out scroll prompt early
         tl.to(scrollIndicator, {
             autoAlpha: 0,
             y: 30,
             duration: 0.2
         }, 0);
 
-        // 3. Symmetrical Layer Swapping
-        // Fade out Hero and disable interactions
+        // 3. Layer Transition
         tl.to(heroLayer, {
             autoAlpha: 0,
             pointerEvents: "none",
-            duration: 0.3
-        }, 0.4); 
+            duration: 0.4
+        }, 0.5); 
 
-        // Fade in Reveal and enable interactions
         tl.to(revealLayer, {
             autoAlpha: 1,
             pointerEvents: "auto",
-            duration: 0.3
-        }, 0.5); 
+            duration: 0.4
+        }, 0.6); 
 
-        // Navbar Interaction logic
+        // Navbar Sticky Logic
         window.addEventListener('scroll', () => {
             const scrollY = window.scrollY;
             if (scrollY > 50) {
@@ -356,6 +365,7 @@
             }
         });
 
+        // Mobile Menu Logic
         const toggleMenu = (open) => {
             if (open) {
                 mobileMenu.style.transform = "translateX(0)";
