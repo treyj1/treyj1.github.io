@@ -142,7 +142,7 @@
 
             fetch(SCRIPT_URL, {
                 method: 'POST',
-                mode: 'no-cors', // Essential for Google Scripts
+                mode: 'no-cors', 
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             })
@@ -150,7 +150,10 @@
                 form.innerHTML = `
                     <div class="text-center py-20 animate-pulse">
                         <h2 class="text-4xl font-marcellus text-red-700 uppercase mb-4">Request Received</h2>
-                        <p class="text-white/40 tracking-widest uppercase text-xs leading-loose">The National 3 has logged your request.</p>
+                        <p class="text-white/40 tracking-widest uppercase text-xs leading-loose">
+                            Your information request was received.<br>
+                            More details will be sent to your email once they become available.
+                        </p>
                     </div>`;
             })
             .catch(err => {
