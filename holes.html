@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signature Holes | The National 3</title>
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Urbanist:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        marcellus: ['Marcellus', 'serif'],
+                        urbanist: ['Urbanist', 'sans-serif'],
+                    },
+                    colors: {
+                        crimson: {
+                            DEFAULT: '#7f1d1d',
+                            900: '#450a0a',
+                            800: '#7f1d1d',
+                            700: '#991b1b',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            margin: 0;
+            background-color: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+        ::selection {
+            background: #7f1d1d;
+            color: white;
+        }
+        .nav-transition {
+            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .header-logo {
+            height: 40px;
+            width: 40px;
+            object-fit: cover;
+            border-radius: 9999px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        /* Smooth Horizontal Scroll Container */
+        .horizontal-scroll-section {
+            width: 100%;
+            overflow: hidden;
+        }
+        .horizontal-scroll-wrapper {
+            display: flex;
+            width: 300%; 
+            will-change: transform;
+        }
+        .hole-card {
+            width: 100vw;
+            height: 80vh;
+            flex-shrink: 0;
+            padding: 0 5vw;
+        }
+    </style>
+</head>
+<body class="font-urbanist bg-neutral-950">
+
+    <div id="mobile-menu" class="fixed inset-0 z-[150] bg-neutral-950 flex flex-col items-center justify-center translate-x-full transition-transform duration-700 ease-in-out">
+        <button id="close-menu" class="absolute top-8 right-8 text-white hover:text-red-700 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+        <div class="flex flex-col items-center gap-10">
+            <a href="index.html" class="text-4xl font-marcellus uppercase tracking-widest hover:text-red-700 transition-colors mobile-link">Home</a>
+            <a href="holes.html" class="text-4xl font-marcellus uppercase tracking-widest text-red-700 mobile-link">Signature Holes</a>
+            <a href="apply.html" class="mt-8 px-12 py-4 rounded-sm text-sm font-bold uppercase tracking-[0.3em] bg-white text-neutral-900 mobile-link">Apply Now</a>
+        </div>
+    </div>
+
+    <nav id="navbar" class="fixed w-full z-[100] nav-transition py-6 px-6 bg-neutral-950/80 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <img src="Logo.jpg" alt="Logo" class="header-logo" onerror="this.src='https://images.unsplash.com/photo-1535131749006-b7f58c99034b?q=80&w=200&auto=format&fit=crop'">
+                <span class="text-xl font-medium tracking-[0.2em] uppercase font-marcellus text-white">
+                    The National <span class="text-red-700">3</span>
+                </span>
+            </div>
+
+            <div class="hidden md:flex items-center gap-10">
+                <a href="index.html" class="text-[10px] font-bold uppercase tracking-[0.3em] text-white hover:opacity-50 transition-all">Back Home</a>
+                <a href="apply.html" class="px-8 py-2.5 rounded-sm text-[10px] font-bold uppercase tracking-[0.3em] bg-white text-neutral-900 inline-block">
+                    Apply Now
+                </a>
+            </div>
+
+            <button id="open-menu" class="md:hidden text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
+        </div>
+    </nav>
+
+    <main class="pt-32">
+        <section id="holes" class="bg-neutral-950">
+            <div class="px-6 mb-20 text-center">
+                <span class="text-[10px] font-bold text-red-700 uppercase tracking-[0.5em] mb-4 block">A Masterpiece Course</span>
+                <h2 class="text-5xl md:text-7xl font-marcellus uppercase text-white tracking-tight">Signature Holes</h2>
+            </div>
+            
+            <div class="horizontal-scroll-section">
+                <div class="horizontal-scroll-wrapper">
+                    <div class="hole-card flex flex-col md:flex-row items-center gap-12">
+                        <div class="w-full md:w-2/3 h-[400px] md:h-[600px] overflow-hidden rounded-sm relative group">
+                            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-700"></div>
+                            <img src="https://images.unsplash.com/photo-1591491719082-7e14427c3942?q=80&w=2000&auto=format&fit=crop" class="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-1000" alt="Hole 1">
+                        </div>
+                        <div class="w-full md:w-1/3">
+                            <span class="text-4xl md:text-6xl font-marcellus text-red-800 opacity-50 block mb-4">01</span>
+                            <h3 class="text-3xl font-marcellus uppercase text-white mb-6">The Granite Fall</h3>
+                            <p class="text-white/40 font-light leading-loose text-sm uppercase tracking-widest">A 165-yard test over natural waterfalls. Wind precision is paramount on this inaugural signature par 3.</p>
+                        </div>
+                    </div>
+
+                    <div class="hole-card flex flex-col md:flex-row-reverse items-center gap-12">
+                        <div class="w-full md:w-2/3 h-[400px] md:h-[600px] overflow-hidden rounded-sm relative group">
+                            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-700"></div>
+                            <img src="https://images.unsplash.com/photo-1605058814717-380c5e7592f1?q=80&w=2000&auto=format&fit=crop" class="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-1000" alt="Hole 4">
+                        </div>
+                        <div class="w-full md:w-1/3">
+                            <span class="text-4xl md:text-6xl font-marcellus text-red-800 opacity-50 block mb-4">04</span>
+                            <h3 class="text-3xl font-marcellus uppercase text-white mb-6">The High Meadow</h3>
+                            <p class="text-white/40 font-light leading-loose text-sm uppercase tracking-widest">Elevated tee box offering panoramic views of the Rhode Island wilderness. Requires a calculated carry.</p>
+                        </div>
+                    </div>
+
+                    <div class="hole-card flex flex-col md:flex-row items-center gap-12">
+                        <div class="w-full md:w-2/3 h-[400px] md:h-[600px] overflow-hidden rounded-sm relative group">
+                            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-700"></div>
+                            <img src="https://images.unsplash.com/photo-1593113617138-038c7fdfc979?q=80&w=2000&auto=format&fit=crop" class="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-1000" alt="Hole 18">
+                        </div>
+                        <div class="w-full md:w-1/3">
+                            <span class="text-4xl md:text-6xl font-marcellus text-red-800 opacity-50 block mb-4">18</span>
+                            <h3 class="text-3xl font-marcellus uppercase text-white mb-6">Championship End</h3>
+                            <p class="text-white/40 font-light leading-loose text-sm uppercase tracking-widest">Where history is made. An island green surrounded by stone architecture and absolute silence.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="bg-neutral-950 py-32 px-6 border-t border-white/5 flex flex-col items-center">
+            <img src="Logo.jpg" alt="Logo" class="header-logo mb-16 opacity-80" onerror="this.src='https://images.unsplash.com/photo-1535131749006-b7f58c99034b?q=80&w=200&auto=format&fit=crop'">
+            <div class="flex flex-wrap justify-center gap-14 mb-20">
+                <a href="index.html" class="text-white/30 hover:text-red-800 transition-colors text-[9px] font-bold uppercase tracking-[0.5em]">Home</a>
+                <a href="holes.html" class="text-white/30 hover:text-red-800 transition-colors text-[9px] font-bold uppercase tracking-[0.5em]">Signature Holes</a>
+                <a href="apply.html" class="text-white/30 hover:text-red-800 transition-colors text-[9px] font-bold uppercase tracking-[0.5em]">Registration</a>
+            </div>
+            <p class="text-white/10 text-[9px] font-bold uppercase tracking-[1em]">The Preserve · Rhode Island · 2026</p>
+        </footer>
+    </main>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Horizontal Scroll for Holes
+        const horizontalWrapper = document.querySelector('.horizontal-scroll-wrapper');
+        const holesSection = document.querySelector('#holes');
+
+        gsap.to(horizontalWrapper, {
+            x: () => -(horizontalWrapper.scrollWidth - window.innerWidth),
+            ease: "none",
+            scrollTrigger: {
+                trigger: holesSection,
+                start: "top top",
+                end: () => "+=" + horizontalWrapper.scrollWidth,
+                scrub: true,
+                pin: true,
+                anticipatePin: 1
+            }
+        });
+
+        // Mobile Menu
+        const mobileMenu = document.querySelector('#mobile-menu');
+        const openMenuBtn = document.querySelector('#open-menu');
+        const closeMenuBtn = document.querySelector('#close-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        const toggleMenu = (open) => {
+            mobileMenu.style.transform = open ? "translateX(0)" : "translateX(100%)";
+            if(open) {
+                gsap.from(mobileLinks, { y: 20, opacity: 0, stagger: 0.1, delay: 0.2 });
+            }
+        };
+
+        openMenuBtn.addEventListener('click', () => toggleMenu(true));
+        closeMenuBtn.addEventListener('click', () => toggleMenu(false));
+    </script>
+</body>
+</html>

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The National 3 | Identify the Best</title>
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Urbanist:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        marcellus: ['Marcellus', 'serif'],
+                        urbanist: ['Urbanist', 'sans-serif'],
+                    },
+                    colors: {
+                        crimson: {
+                            DEFAULT: '#7f1d1d',
+                            900: '#450a0a',
+                            800: '#7f1d1d',
+                            700: '#991b1b',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            margin: 0;
+            background-color: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+        #zoom-unit {
+            will-change: transform;
+            transform-origin: center center;
+        }
+        .zoom-text {
+            will-change: transform, opacity;
+        }
+        ::selection {
+            background: #7f1d1d;
+            color: white;
+        }
+        .nav-transition {
+            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .header-logo {
+            height: 40px;
+            width: 40px;
+            object-fit: cover;
+            border-radius: 9999px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .intro-logo {
+            height: 140px;
+            width: 140px;
+            object-fit: cover;
+            border-radius: 9999px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 40px rgba(0,0,0,0.5);
+            will-change: transform;
+        }
+    </style>
+</head>
+<body class="font-urbanist">
+
+    <div id="mobile-menu" class="fixed inset-0 z-[150] bg-neutral-950 flex flex-col items-center justify-center translate-x-full transition-transform duration-700 ease-in-out">
+        <button id="close-menu" class="absolute top-8 right-8 text-white hover:text-red-700 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+        <div class="flex flex-col items-center gap-10">
+            <a href="index.html" class="text-4xl font-marcellus uppercase tracking-widest hover:text-red-700 transition-colors mobile-link">Home</a>
+            <a href="holes.html" class="text-4xl font-marcellus uppercase tracking-widest hover:text-red-700 transition-colors mobile-link">Signature Holes</a>
+            <a href="#event" class="text-4xl font-marcellus uppercase tracking-widest hover:text-red-700 transition-colors mobile-link">The Event</a>
+            <a href="https://club9golf.com" target="_blank" class="text-4xl font-marcellus uppercase tracking-widest hover:text-red-700 transition-colors mobile-link">Club9</a>
+            <a href="apply.html" class="mt-8 px-12 py-4 rounded-sm text-sm font-bold uppercase tracking-[0.3em] bg-white text-neutral-900 mobile-link">How to Play</a>
+        </div>
+    </div>
+
+    <nav id="navbar" class="fixed w-full z-[100] nav-transition py-6 px-6">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex flex-col items-start gap-1">
+                <div class="flex items-center gap-4">
+                    <img src="Logo.jpg" alt="Logo" class="header-logo" onerror="this.src='https://images.unsplash.com/photo-1535131749006-b7f58c99034b?q=80&w=200&auto=format&fit=crop'">
+                    <span class="text-xl font-medium tracking-[0.2em] uppercase font-marcellus text-white logo-text transition-colors">
+                        The National <span class="text-red-700">3</span>
+                    </span>
+                </div>
+                <span class="text-[8px] font-bold uppercase tracking-[0.4em] text-white/40 logo-subtext ml-14">A Club9 event</span>
+            </div>
+
+            <div class="hidden md:flex items-center gap-10">
+                <a href="#event" class="text-[10px] font-bold uppercase tracking-[0.3em] text-white hover:opacity-50 transition-all nav-link">The Event</a>
+                <a href="holes.html" class="text-[10px] font-bold uppercase tracking-[0.3em] text-white hover:opacity-50 transition-all nav-link">The Holes</a>
+                <a href="https://club9golf.com" target="_blank" class="text-[10px] font-bold uppercase tracking-[0.3em] text-white hover:opacity-50 transition-all nav-link">Club9</a>
+                <a href="apply.html" class="px-8 py-2.5 rounded-sm text-[10px] font-bold uppercase tracking-[0.3em] bg-white text-neutral-900 transition-all transform hover:translate-y-[-2px] nav-btn inline-block">
+                    How to Play
+                </a>
+            </div>
+
+            <button id="open-menu" class="md:hidden text-white transition-colors menu-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
+        </div>
+    </nav>
+
+    <main>
+        <div class="h-[400vh] relative" id="scroll-container">
+            <div class="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
+                
+                <div id="reveal-layer" class="absolute inset-0 z-0 opacity-0 invisible pointer-events-none">
+                    <div class="absolute inset-0">
+                        <div class="absolute inset-0 bg-white/50 z-10"></div>
+                        <img src="Golf_02.jpg" alt="The Preserve" class="w-full h-full object-cover grayscale-[10%]" onerror="this.src='https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?q=80&w=2070&auto=format&fit=crop'">
+                    </div>
+
+                    <div class="relative z-20 h-full w-full flex flex-col items-center justify-center p-6 text-center">
+                        <div class="max-w-5xl">
+                            <div class="inline-flex items-center gap-3 mb-6">
+                                <div class="h-[1px] w-12 bg-red-900/20"></div>
+                                <span class="text-[10px] font-bold text-red-900 uppercase tracking-[0.4em]">2026 Inaugural</span>
+                                <div class="h-[1px] w-12 bg-red-900/20"></div>
+                            </div>
+                            <h2 class="text-7xl md:text-[8rem] font-normal text-neutral-950 uppercase tracking-tight leading-[1] font-marcellus">
+                                THE NATIONAL <span class="text-red-900">3</span>
+                            </h2>
+                            <p class="text-[10px] font-bold text-red-900/60 uppercase tracking-[0.6em] mb-10">A Club9 event</p>
+                            
+                            <div class="space-y-4 mb-20">
+                                <p class="text-xl md:text-2xl text-neutral-800 font-light tracking-[0.1em] uppercase">
+                                    Identify the Best Par 3 Golfer in the Country
+                                </p>
+                                <p class="text-[10px] md:text-xs text-red-900 font-bold tracking-[0.4em] uppercase">
+                                    The Preserve Sporting Club, Wyoming, Rhode Island
+                                </p>
+                            </div>
+                            <div class="flex justify-center gap-20 border-t border-neutral-100 pt-16">
+                                <div class="text-center">
+                                    <p class="text-4xl font-normal text-neutral-950 uppercase mb-2 font-marcellus tracking-widest">36</p>
+                                    <p class="text-[9px] font-bold text-neutral-950 uppercase tracking-[0.3em]">Total Holes</p>
+                                </div>
+                                <div class="text-center">
+                                    <p class="text-4xl font-normal text-neutral-950 uppercase mb-2 font-marcellus tracking-widest">02</p>
+                                    <p class="text-[9px] font-bold text-neutral-950 uppercase tracking-[0.3em]">Full Days</p>
+                                </div>
+                                <div class="text-center">
+                                    <p class="text-4xl font-normal text-neutral-950 uppercase mb-2 font-marcellus tracking-widest">$100k</p>
+                                    <p class="text-[9px] font-bold text-neutral-950 uppercase tracking-[0.3em]">Winner's Share</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="hero-layer" class="absolute inset-0 z-10 flex flex-col items-center justify-center">
+                    <div class="absolute inset-0">
+                        <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/20 to-red-950/80 z-10"></div>
+                        <img src="Golf_01.jpg" alt="Hero Background" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1593113617138-038c7fdfc979?q=80&w=2070&auto=format&fit=crop'">
+                    </div>
+
+                    <div class="relative z-20 text-center px-6 flex flex-col items-center">
+                        <div id="zoom-unit">
+                            <div class="mb-12 flex justify-center">
+                                <img src="Logo.jpg" alt="Tournament Logo" class="intro-logo" onerror="this.src='https://images.unsplash.com/photo-1535131749006-b7f58c99034b?q=80&w=200&auto=format&fit=crop'">
+                            </div>
+                            <h1 id="main-title" class="zoom-text text-7xl md:text-[10rem] font-normal text-white leading-[1] uppercase tracking-tighter font-marcellus">
+                                Identify the <br />
+                                <span class="text-red-700">Best.</span>
+                            </h1>
+                        </div>
+
+                        <div id="scroll-indicator" class="mt-20">
+                            <p class="text-lg md:text-xl text-white/50 font-light mb-14 max-w-2xl mx-auto tracking-[0.2em] uppercase">
+                                Are you the best par 3 golfer in the country?
+                            </p>
+                            <div class="flex flex-col items-center gap-4 text-white/30 animate-pulse">
+                                <span class="text-[9px] font-bold uppercase tracking-[0.6em]">Scroll to Enter</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section id="event" class="py-48 bg-neutral-950 text-white text-center">
+            <div class="max-w-7xl mx-auto px-6">
+                <h2 class="text-6xl md:text-8xl font-normal uppercase tracking-tight mb-12 font-marcellus">The Event</h2>
+                
+                <div class="max-w-4xl mx-auto mb-32 space-y-8 text-white/70 font-light uppercase text-xs tracking-[0.2em] leading-loose">
+                    <p>
+                        The National 3 is a world-class tournament designed to identify the greatest par 3 golfer in the world. Open to both professionals and amateurs through exclusive invitations and qualifying rounds, this event highlights the unique joy and strategic intensity of the par 3 experience on a global stage.
+                    </p>
+                    <p>
+                        On September 24th and 25th, 2026, the inaugural championship will take place at the Mountain Par 3 Course at The Preserve Sporting Club in Wyoming, Rhode Island. Over two days and 36 holes, competitors will navigate a course defined by its stunning vistas and tactical complexity, providing an intimate and thrilling experience for players and spectators alike.
+                    </p>
+                    <p>
+                        The elite field features 72 of the most accomplished golfers in the country. This group brings together proven professionals and top-tier amateurs who have demonstrated exceptional skill at the national and regional levels.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-24">
+                    <div class="flex flex-col items-center">
+                        <h3 class="text-3xl font-normal uppercase mb-8 tracking-widest font-marcellus text-red-700">Arrival</h3>
+                        <p class="text-white/60 leading-relaxed font-light uppercase text-xs tracking-[0.2em]">Click here for directions to The Preserve</p>
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=The+Preserve+at+Boulder+Hills+RI&origin=My+Location" target="_blank" class="mt-8 px-10 py-4 bg-red-700 text-white text-[10px] font-bold uppercase tracking-[0.4em] rounded-sm hover:bg-red-800 transition-all transform hover:-translate-y-1">
+                            Directions
+                        </a>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <h3 class="text-3xl font-normal uppercase mb-8 tracking-widest font-marcellus text-red-700">The Club</h3>
+                        <p class="text-white/60 leading-relaxed font-light uppercase text-xs tracking-[0.2em]">Learn more about The Preserve</p>
+                        <a href="https://www.thepreserveri.com/resort-spa/experiences/golf/" target="_blank" class="mt-8 px-10 py-4 bg-red-700 text-white text-[10px] font-bold uppercase tracking-[0.4em] rounded-sm hover:bg-red-800 transition-all transform hover:-translate-y-1">
+                            Explore
+                        </a>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <h3 class="text-3xl font-normal uppercase mb-8 tracking-widest font-marcellus text-red-700">The Prize</h3>
+                        <p class="text-white/60 leading-relaxed font-light uppercase text-xs tracking-[0.2em] max-w-[280px]">$100,000 winner's share of the purse and a host of other prizes available</p>
+                        <a href="#" class="mt-8 px-10 py-4 bg-red-700 text-white text-[10px] font-bold uppercase tracking-[0.4em] rounded-sm hover:bg-red-800 transition-all transform hover:-translate-y-1">
+                            PRIZES
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+       <footer class="bg-neutral-950 py-32 px-6 border-t border-white/5 flex flex-col items-center">
+            <div class="flex flex-col items-center gap-4 mb-16">
+                <div class="flex items-center gap-12">
+                    <img src="Logo.jpg" alt="The National 3 Logo" class="header-logo opacity-80" onerror="this.src='https://images.unsplash.com/photo-1535131749006-b7f58c99034b?q=80&w=200&auto=format&fit=crop'">
+                    <a href="https://club9golf.com" target="_blank" class="transition-opacity hover:opacity-70">
+                        <img src="Club9_Logo.png" alt="Club9 Logo" class="h-10 w-auto object-contain" onerror="this.style.display='none'">
+                    </a>
+                </div>
+                <span class="text-[9px] font-bold uppercase tracking-[0.4em] text-white/30">A Club9 event</span>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-14 mb-20">
+                <a href="holes.html" class="text-white/30 hover:text-red-800 transition-colors text-[9px] font-bold uppercase tracking-[0.5em]">The Venue</a>
+                <a href="#event" class="text-white/30 hover:text-red-800 transition-colors text-[9px] font-bold uppercase tracking-[0.5em]">The Event</a>
+                <a href="https://club9golf.com" target="_blank" class="text-white/30 hover:text-red-800 transition-colors text-[9px] font-bold uppercase tracking-[0.5em]">Club9</a>
+                <a href="apply.html" class="text-white/30 hover:text-red-800 transition-colors text-[9px] font-bold uppercase tracking-[0.5em]">How to Play</a>
+            </div>
+            <p class="text-white/10 text-[9px] font-bold uppercase tracking-[1em]">The Preserve · Rhode Island · 2026</p>
+        </footer>
+    </main>
+
+    <script>
+        if (history.scrollRestoration) {
+            history.scrollRestoration = 'manual';
+        }
+        window.scrollTo(0, 0);
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        const scrollContainer = document.querySelector('#scroll-container');
+        const heroLayer = document.querySelector('#hero-layer');
+        const revealLayer = document.querySelector('#reveal-layer');
+        const zoomUnit = document.querySelector('#zoom-unit');
+        const scrollIndicator = document.querySelector('#scroll-indicator');
+        const navbar = document.querySelector('#navbar');
+        const mobileMenu = document.querySelector('#mobile-menu');
+        const openMenuBtn = document.querySelector('#open-menu');
+        const closeMenuBtn = document.querySelector('#close-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: scrollContainer,
+                start: "top top",
+                end: "bottom bottom",
+                scrub: true,
+                invalidateOnRefresh: true
+            }
+        });
+
+        gsap.set(revealLayer, { autoAlpha: 0, pointerEvents: "none" });
+        gsap.set(heroLayer, { autoAlpha: 1, pointerEvents: "auto" });
+
+        tl.to(zoomUnit, {
+            scale: 85,
+            ease: "power1.in",
+            force3D: true,
+            duration: 1
+        }, 0);
+
+        tl.to(scrollIndicator, {
+            autoAlpha: 0,
+            y: 30,
+            duration: 0.2
+        }, 0);
+
+        tl.to(heroLayer, {
+            autoAlpha: 0,
+            pointerEvents: "none",
+            duration: 0.4
+        }, 0.5);
+
+        tl.to(revealLayer, {
+            autoAlpha: 1,
+            pointerEvents: "auto",
+            duration: 0.4
+        }, 0.55);
+
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            if (scrollY > 100) {
+                navbar.classList.add('bg-white/95', 'shadow-lg', 'py-2');
+                navbar.classList.remove('bg-transparent', 'py-6');
+                navbar.querySelectorAll('.nav-link, .logo-text, .menu-toggle, .logo-subtext').forEach(el => el.classList.replace('text-white', 'text-neutral-900'));
+                navbar.querySelectorAll('.logo-subtext').forEach(el => el.classList.replace('text-white/40', 'text-neutral-400'));
+                
+                const btn = navbar.querySelector('.nav-btn');
+                if(btn) {
+                    btn.classList.replace('bg-white', 'bg-red-900');
+                    btn.classList.replace('text-neutral-900', 'text-white');
+                }
+            } else {
+                navbar.classList.remove('bg-white/95', 'shadow-lg', 'py-2');
+                navbar.classList.add('bg-transparent', 'py-6');
+                navbar.querySelectorAll('.nav-link, .logo-text, .menu-toggle, .logo-subtext').forEach(el => el.classList.replace('text-neutral-900', 'text-white'));
+                navbar.querySelectorAll('.logo-subtext').forEach(el => el.classList.replace('text-neutral-400', 'text-white/40'));
+                
+                const btn = navbar.querySelector('.nav-btn');
+                if(btn) {
+                    btn.classList.replace('bg-red-900', 'bg-white');
+                    btn.classList.replace('text-white', 'text-neutral-900');
+                }
+            }
+        });
+
+        const toggleMenu = (open) => {
+            if (open) {
+                mobileMenu.style.transform = "translateX(0)";
+                gsap.from(mobileLinks, {
+                    y: 40,
+                    opacity: 0,
+                    stagger: 0.1,
+                    delay: 0.3,
+                    ease: "power3.out"
+                });
+            } else {
+                mobileMenu.style.transform = "translateX(100%)";
+            }
+        };
+
+        openMenuBtn.addEventListener('click', () => toggleMenu(true));
+        closeMenuBtn.addEventListener('click', () => toggleMenu(false));
+        mobileLinks.forEach(link => link.addEventListener('click', () => toggleMenu(false)));
+
+    </script>
+</body>
+</html>
