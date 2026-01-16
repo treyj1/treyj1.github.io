@@ -65,11 +65,13 @@
             <div class="flex flex-col items-start gap-1">
                 <a href="index.html" class="flex items-center gap-4 group">
                     <img src="Logo.jpg" alt="Logo" class="header-logo group-hover:border-red-700 transition-colors" onerror="this.src='https://images.unsplash.com/photo-1535131749006-b7f58c99034b?q=80&w=200&auto=format&fit=crop'">
-                    <span class="text-xl font-medium tracking-[0.2em] uppercase font-marcellus text-white group-hover:text-red-700 transition-colors">
+                    <span class="text-xl font-medium tracking-[0.2em] uppercase font-marcellus text-white group-hover:text-red-700 transition-colors transition-colors">
                         The National <span class="text-red-700">3</span>
                     </span>
                 </a>
-                <span class="text-[8px] font-bold uppercase tracking-[0.4em] text-white/40 ml-14">A Club9 event</span>
+                <a href="https://club9golf.com" target="_blank" class="text-[8px] font-bold uppercase tracking-[0.4em] text-white/40 ml-14 hover:text-red-700 transition-colors">
+                    A Club9 event
+                </a>
             </div>
 
             <div class="hidden md:flex items-center gap-10">
@@ -78,7 +80,7 @@
                 <a href="https://club9golf.com" target="_blank" class="text-[10px] font-bold uppercase tracking-[0.3em] text-white hover:opacity-50 transition-all">Club9</a>
             </div>
 
-            <button id="open-menu" class="md:hidden text-white">
+            <button id="open-menu" class="md:hidden text-white transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
             </button>
         </div>
@@ -132,7 +134,9 @@
                         <img src="Club9_Logo.png" alt="Club9 Logo" class="h-10 w-auto object-contain">
                     </a>
                 </div>
-                <span class="text-[9px] font-bold uppercase tracking-[0.4em] text-white/30">A Club9 event</span>
+                <a href="https://club9golf.com" target="_blank" class="text-[9px] font-bold uppercase tracking-[0.4em] text-white/30 hover:text-red-700 transition-colors">
+                    A Club9 event
+                </a>
             </div>
             <div class="flex gap-14 mb-10">
                 <a href="index.html" class="text-white/20 hover:text-red-700 transition-colors text-[9px] font-bold uppercase tracking-[0.5em]">Home</a>
@@ -153,7 +157,7 @@
             display.innerText = e.target.value + '%';
         });
 
-        // Mobile Menu Toggle Logic
+        // Mobile Menu Toggle Logic (Synced with Index Fix)
         const mobileMenu = document.querySelector('#mobile-menu');
         const openMenuBtn = document.querySelector('#open-menu');
         const closeMenuBtn = document.querySelector('#close-menu');
