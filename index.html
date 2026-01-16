@@ -162,7 +162,7 @@
                         <img src="Golf_01.jpg" alt="Hero Background" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1593113617138-038c7fdfc979?q=80&w=2070&auto=format&fit=crop'">
                     </div>
 
-                    <div class="relative z-20 text-center px-8 flex flex-col items-center">
+                    <div class="relative z-20 text-center px-8 flex flex-col items-center pt-32 md:pt-0">
                         <div id="zoom-unit">
                             <div class="mb-12 flex justify-center">
                                 <img src="Logo.jpg" alt="Tournament Logo" class="intro-logo" onerror="this.src='https://images.unsplash.com/photo-1535131749006-b7f58c99034b?q=80&w=200&auto=format&fit=crop'">
@@ -250,7 +250,6 @@
     </main>
 
     <script>
-        // MOBILE FIX: Ensure scroll position is 0 on load and reload
         window.onbeforeunload = function () {
             window.scrollTo(0, 0);
         }
@@ -277,7 +276,6 @@
         const closeMenuBtn = document.querySelector('#close-menu');
         const mobileLinks = document.querySelectorAll('.mobile-link');
 
-        // Initial setup
         gsap.set(revealLayer, { autoAlpha: 0, pointerEvents: "none" });
         gsap.set(heroLayer, { autoAlpha: 1, pointerEvents: "auto" });
         gsap.set(zoomUnit, { scale: 1, autoAlpha: 1 });
@@ -290,8 +288,6 @@
                 scrub: 1,
                 invalidateOnRefresh: true,
                 onUpdate: (self) => {
-                    // MOBILE FIX: Added a check for window width. 
-                    // This prevents the reload loop on mobile devices.
                     if (window.innerWidth > 768 && self.direction === -1 && self.progress < 0.60) {
                         window.location.reload();
                     }
@@ -299,7 +295,6 @@
             }
         });
 
-        // 1. Zoom and fade out the lens unit
         tl.fromTo(zoomUnit, 
             { scale: 1, autoAlpha: 1 }, 
             {
@@ -310,14 +305,12 @@
                 duration: 1
             }, 0);
 
-        // 2. Fade out scroll prompt early
         tl.to(scrollIndicator, {
             autoAlpha: 0,
             y: 30,
             duration: 0.2
         }, 0);
 
-        // 3. Layer Transition
         tl.to(heroLayer, {
             autoAlpha: 0,
             pointerEvents: "none",
@@ -330,7 +323,6 @@
             duration: 0.4
         }, 0.6); 
 
-        // Navbar Sticky Logic
         window.addEventListener('scroll', () => {
             const scrollY = window.scrollY;
             if (scrollY > 50) {
@@ -370,7 +362,6 @@
             }
         });
 
-        // Mobile Menu Logic
         const toggleMenu = (open) => {
             if (open) {
                 mobileMenu.style.transform = "translateX(0)";
