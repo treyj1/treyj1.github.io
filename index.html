@@ -74,7 +74,6 @@
             text-decoration: none;
             color: inherit;
         }
-        /* Flicker Fix: hide from layout until triggered */
         #mobile-menu {
             display: none; 
         }
@@ -96,15 +95,17 @@
 
     <nav id="navbar" class="fixed w-full z-[100] nav-transition py-6 px-6">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <a href="index.html" class="logo-link flex flex-col items-start gap-1 group">
-                <div class="flex items-center gap-4">
+            <div class="flex flex-col items-start gap-1">
+                <a href="index.html" class="logo-link flex items-center gap-4 group">
                     <img src="Logo.jpg" alt="Logo" class="header-logo group-hover:border-red-700 transition-colors" onerror="this.src='https://images.unsplash.com/photo-1535131749006-b7f58c99034b?q=80&w=200&auto=format&fit=crop'">
                     <span class="text-xl font-medium tracking-[0.2em] uppercase font-marcellus text-white logo-text transition-colors group-hover:text-red-700">
                         The National <span class="text-red-700">3</span>
                     </span>
-                </div>
-                <span class="text-[8px] font-bold uppercase tracking-[0.4em] text-white/40 logo-subtext ml-14">A Club9 event</span>
-            </a>
+                </a>
+                <a href="https://club9golf.com" target="_blank" class="text-[8px] font-bold uppercase tracking-[0.4em] text-white/40 logo-subtext ml-14 hover:text-red-700 transition-colors">
+                    A Club9 event
+                </a>
+            </div>
 
             <div class="hidden md:flex items-center gap-10">
                 <a href="#event" class="text-[10px] font-bold uppercase tracking-[0.3em] text-white hover:opacity-50 transition-all nav-link">The Event</a>
@@ -131,7 +132,7 @@
                     </div>
 
                     <div class="relative z-20 h-full w-full flex flex-col items-center justify-center px-8 py-6 text-center">
-                        <a href="index.html" class="logo-link max-w-5xl block">
+                        <div class="max-w-5xl block">
                             <div class="inline-flex items-center gap-3 mb-6">
                                 <div class="h-[1px] w-12 bg-red-900/20"></div>
                                 <span class="text-[10px] font-bold text-red-900 uppercase tracking-[0.4em]">2026 Inaugural</span>
@@ -141,7 +142,7 @@
                                 THE NATIONAL <span class="text-red-900">3</span>
                             </h2>
                             <p class="text-[10px] font-bold text-red-900/60 uppercase tracking-[0.6em] mb-10">A Club9 event</p>
-                        </a>
+                        </div>
                         
                         <div class="space-y-4 mb-20">
                             <p class="text-lg md:text-2xl text-neutral-800 font-light tracking-[0.1em] uppercase">
@@ -175,7 +176,7 @@
                     </div>
 
                     <div class="relative z-20 text-center px-8 flex flex-col items-center pt-32 md:pt-0">
-                        <a href="index.html" id="zoom-unit" class="logo-link group">
+                        <div id="zoom-unit" class="group">
                             <div class="mb-12 flex justify-center">
                                 <img src="Logo.jpg" alt="Tournament Logo" class="intro-logo group-hover:scale-105 transition-transform" onerror="this.src='https://images.unsplash.com/photo-1535131749006-b7f58c99034b?q=80&w=200&auto=format&fit=crop'">
                             </div>
@@ -183,7 +184,7 @@
                                 Identify the <br />
                                 <span class="text-red-700">Best</span>
                             </h1>
-                        </a>
+                        </div>
 
                         <div id="scroll-indicator" class="mt-20">
                             <p class="text-base md:text-xl text-white/50 font-light mb-14 max-w-2xl mx-auto tracking-[0.2em] uppercase">
@@ -215,25 +216,25 @@
                     </p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-24">
-                    <div class="flex flex-col items-center">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-24 items-stretch">
+                    <div class="flex flex-col items-center h-full">
                         <h3 class="text-3xl font-normal uppercase mb-8 tracking-widest font-marcellus text-red-700">Arrival</h3>
-                        <p class="text-white/60 leading-relaxed font-light uppercase text-xs tracking-[0.2em]">Click here for directions to The Preserve</p>
-                        <a href="https://www.google.com/maps/dir/?api=1&destination=The+Preserve+at+Boulder+Hills+RI&origin=My+Location" target="_blank" class="mt-8 px-10 py-4 bg-red-700 text-white text-[10px] font-bold uppercase tracking-[0.4em] rounded-sm hover:bg-red-800 transition-all transform hover:-translate-y-1">
+                        <p class="text-white/60 leading-relaxed font-light uppercase text-xs tracking-[0.2em] mb-8">Click here for directions to The Preserve</p>
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=The+Preserve+at+Boulder+Hills+RI&origin=My+Location" target="_blank" class="mt-auto px-10 py-4 bg-red-700 text-white text-[10px] font-bold uppercase tracking-[0.4em] rounded-sm hover:bg-red-800 transition-all transform hover:-translate-y-1">
                             Directions
                         </a>
                     </div>
-                    <div class="flex flex-col items-center">
-                        <h3 class="text-3xl font-normal uppercase mb-8 tracking-widest font-marcellus text-red-700">The Club</h3>
-                        <p class="text-white/60 leading-relaxed font-light uppercase text-xs tracking-[0.2em]">Learn more about The Preserve</p>
-                        <a href="https://www.thepreserveri.com/resort-spa/experiences/golf/" target="_blank" class="mt-8 px-10 py-4 bg-red-700 text-white text-[10px] font-bold uppercase tracking-[0.4em] rounded-sm hover:bg-red-800 transition-all transform hover:-translate-y-1">
+                    <div class="flex flex-col items-center h-full">
+                        <h3 class="text-3xl font-normal uppercase mb-8 tracking-widest font-marcellus text-red-700">The CLUB</h3>
+                        <p class="text-white/60 leading-relaxed font-light uppercase text-xs tracking-[0.2em] mb-8">Learn more about the Preserve at Boulder Hills</p>
+                        <a href="https://www.thepreserveri.com/resort-spa/experiences/golf/" target="_blank" class="mt-auto px-10 py-4 bg-red-700 text-white text-[10px] font-bold uppercase tracking-[0.4em] rounded-sm hover:bg-red-800 transition-all transform hover:-translate-y-1">
                             Explore
                         </a>
                     </div>
-                    <div class="flex flex-col items-center">
-                        <h3 class="text-3xl font-normal uppercase mb-8 tracking-widest font-marcellus text-red-700">The Prize</h3>
-                        <p class="text-white/60 leading-relaxed font-light uppercase text-xs tracking-[0.2em] max-w-[280px]">$100,000 winner's share of the purse and a host of other prizes available</p>
-                        <a href="#" class="mt-8 px-10 py-4 bg-red-700 text-white text-[10px] font-bold uppercase tracking-[0.4em] rounded-sm hover:bg-red-800 transition-all transform hover:-translate-y-1">
+                    <div class="flex flex-col items-center h-full">
+                        <h3 class="text-3xl font-normal uppercase mb-8 tracking-widest font-marcellus text-red-700">Prizes</h3>
+                        <p class="text-white/60 leading-relaxed font-light uppercase text-xs tracking-[0.2em] max-w-[280px] mb-8">$100,000 winner's share of the purse and a host of other prizes available</p>
+                        <a href="#" class="mt-auto px-10 py-4 bg-red-700 text-white text-[10px] font-bold uppercase tracking-[0.4em] rounded-sm hover:bg-red-800 transition-all transform hover:-translate-y-1">
                             PRIZES
                         </a>
                     </div>
