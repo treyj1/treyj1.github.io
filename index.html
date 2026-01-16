@@ -70,16 +70,19 @@
             box-shadow: 0 0 40px rgba(0,0,0,0.5);
             will-change: transform;
         }
-        /* Ensure clickable areas don't have default link styles */
         .logo-link {
             text-decoration: none;
             color: inherit;
+        }
+        /* Fix to prevent visibility during load */
+        .no-flicker {
+            visibility: hidden;
         }
     </style>
 </head>
 <body class="font-urbanist">
 
-    <div id="mobile-menu" class="fixed inset-0 z-[150] bg-neutral-950 flex flex-col items-center justify-center translate-x-full transition-transform duration-700 ease-in-out">
+    <div id="mobile-menu" class="fixed inset-0 z-[150] bg-neutral-950 flex flex-col items-center justify-center translate-x-full invisible transition-[transform,visibility] duration-700 ease-in-out">
         <button id="close-menu" class="absolute top-8 right-8 text-white hover:text-red-700 transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
@@ -239,15 +242,17 @@
         </section>
 
        <footer class="bg-neutral-950 py-32 px-8 border-t border-white/5 flex flex-col items-center">
-            <a href="index.html" class="logo-link flex flex-col items-center gap-4 mb-16 group">
+            <div class="flex flex-col items-center gap-4 mb-16">
                 <div class="flex items-center gap-12">
-                    <img src="Logo.jpg" alt="The National 3 Logo" class="header-logo opacity-80 group-hover:opacity-100 transition-opacity" onerror="this.src='https://images.unsplash.com/photo-1535131749006-b7f58c99034b?q=80&w=200&auto=format&fit=crop'">
-                    <object data="Club9_Logo.png" type="image/png" class="h-10 w-auto pointer-events-none">
-                        <img src="Club9_Logo.png" alt="Club9 Logo" class="h-10 w-auto object-contain">
-                    </object>
+                    <a href="index.html" class="group">
+                        <img src="Logo.jpg" alt="The National 3 Logo" class="header-logo opacity-80 group-hover:opacity-100 transition-opacity" onerror="this.src='https://images.unsplash.com/photo-1535131749006-b7f58c99034b?q=80&w=200&auto=format&fit=crop'">
+                    </a>
+                    <a href="https://club9golf.com" target="_blank" class="group">
+                        <img src="Club9_Logo.png" alt="Club9 Logo" class="h-10 w-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity">
+                    </a>
                 </div>
-                <span class="text-[9px] font-bold uppercase tracking-[0.4em] text-white/30 group-hover:text-red-700 transition-colors">A Club9 event</span>
-            </a>
+                <span class="text-[9px] font-bold uppercase tracking-[0.4em] text-white/30">A Club9 event</span>
+            </div>
 
             <div class="flex flex-wrap justify-center gap-14 mb-20">
                 <a href="#event" class="text-white/30 hover:text-red-800 transition-colors text-[9px] font-bold uppercase tracking-[0.5em]">The Event</a>
@@ -260,15 +265,12 @@
 
     <script>
         // FORCED SCROLL TOP LOGIC
-        // Set manual restoration immediately
         if (history.scrollRestoration) {
             history.scrollRestoration = 'manual';
         }
 
-        // Force scroll to top on every load/reload
         window.scrollTo(0, 0);
 
-        // Mobile browsers often need this additional event to handle the "back" button or cached reloads
         window.addEventListener('pageshow', (event) => {
             window.scrollTo(0, 0);
         });
@@ -307,7 +309,6 @@
                 scrub: 1,
                 invalidateOnRefresh: true,
                 onUpdate: (self) => {
-                    // This creates the "refresh to start over" feel on desktop
                     if (window.innerWidth > 768 && self.direction === -1 && self.progress < 0.60) {
                         window.location.reload();
                     }
@@ -382,8 +383,10 @@
             }
         });
 
+        // Updated toggle logic to manage visibility classes
         const toggleMenu = (open) => {
             if (open) {
+                mobileMenu.classList.remove('invisible');
                 mobileMenu.style.transform = "translateX(0)";
                 gsap.from(mobileLinks, {
                     y: 40,
@@ -394,6 +397,12 @@
                 });
             } else {
                 mobileMenu.style.transform = "translateX(100%)";
+                // Delay adding invisible until transition finishes
+                setTimeout(() => {
+                    if (mobileMenu.style.transform === "translateX(100%)") {
+                        mobileMenu.classList.add('invisible');
+                    }
+                }, 700);
             }
         };
 
