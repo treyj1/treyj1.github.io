@@ -74,15 +74,15 @@
             text-decoration: none;
             color: inherit;
         }
-        /* Fix to prevent visibility during load */
-        .no-flicker {
-            visibility: hidden;
+        /* Bulletproof fix for the flicker: hide it entirely from layout by default */
+        #mobile-menu {
+            display: none; 
         }
     </style>
 </head>
 <body class="font-urbanist">
 
-    <div id="mobile-menu" class="fixed inset-0 z-[150] bg-neutral-950 flex flex-col items-center justify-center translate-x-full invisible transition-[transform,visibility] duration-700 ease-in-out">
+    <div id="mobile-menu" class="fixed inset-0 z-[150] bg-neutral-950 flex flex-col items-center justify-center translate-x-full">
         <button id="close-menu" class="absolute top-8 right-8 text-white hover:text-red-700 transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
@@ -123,7 +123,6 @@
     <main>
         <div class="h-[400vh] relative" id="scroll-container">
             <div class="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
-                
                 <div id="reveal-layer" class="absolute inset-0 z-0 opacity-0 invisible pointer-events-none">
                     <div class="absolute inset-0">
                         <div class="absolute inset-0 bg-white/50 z-10"></div>
@@ -202,58 +201,39 @@
         <section id="event" class="py-48 bg-neutral-950 text-white text-center">
             <div class="max-w-7xl mx-auto px-8">
                 <h2 class="text-5xl md:text-8xl font-normal uppercase tracking-tight mb-12 font-marcellus">The Event</h2>
-                
                 <div class="max-w-4xl mx-auto mb-32 space-y-8 text-white/70 font-light uppercase text-xs tracking-[0.2em] leading-loose">
-                    <p>
-                        The National 3 is a world-class tournament designed to identify the greatest par 3 golfer in the world. Open to both professionals and amateurs through exclusive invitations and qualifying rounds, this event highlights the unique joy and strategic intensity of the par 3 experience on a global stage.
-                    </p>
-                    <p>
-                        On September 24th and 25th, 2026, the inaugural championship will take place at the Mountain Par 3 Course at The Preserve Sporting Club in Wyoming, Rhode Island. Over two days and 36 holes, competitors will navigate a course defined by its stunning vistas and tactical complexity, providing an intimate and thrilling experience for players and spectators alike.
-                    </p>
-                    <p>
-                        The elite field features 72 of the most accomplished golfers in the country. This group brings together proven professionals and top-tier amateurs who have demonstrated exceptional skill at the national and regional levels.
-                    </p>
+                    <p>The National 3 is a world-class tournament designed to identify the greatest par 3 golfer in the world...</p>
+                    <p>On September 24th and 25th, 2026, the inaugural championship will take place at the Mountain Par 3 Course at The Preserve Sporting Club in Wyoming, Rhode Island...</p>
                 </div>
-
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-24">
                     <div class="flex flex-col items-center">
                         <h3 class="text-3xl font-normal uppercase mb-8 tracking-widest font-marcellus text-red-700">Arrival</h3>
-                        <p class="text-white/60 leading-relaxed font-light uppercase text-xs tracking-[0.2em]">Click here for directions to The Preserve</p>
-                        <a href="https://www.google.com/maps/dir/?api=1&destination=The+Preserve+at+Boulder+Hills+RI&origin=My+Location" target="_blank" class="mt-8 px-10 py-4 bg-red-700 text-white text-[10px] font-bold uppercase tracking-[0.4em] rounded-sm hover:bg-red-800 transition-all transform hover:-translate-y-1">
-                            Directions
-                        </a>
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=The+Preserve+at+Boulder+Hills+RI&origin=My+Location" target="_blank" class="mt-8 px-10 py-4 bg-red-700 text-white text-[10px] font-bold uppercase tracking-[0.4em] rounded-sm hover:bg-red-800 transition-all transform hover:-translate-y-1">Directions</a>
                     </div>
                     <div class="flex flex-col items-center">
                         <h3 class="text-3xl font-normal uppercase mb-8 tracking-widest font-marcellus text-red-700">The Club</h3>
-                        <p class="text-white/60 leading-relaxed font-light uppercase text-xs tracking-[0.2em]">Learn more about The Preserve</p>
-                        <a href="https://www.thepreserveri.com/resort-spa/experiences/golf/" target="_blank" class="mt-8 px-10 py-4 bg-red-700 text-white text-[10px] font-bold uppercase tracking-[0.4em] rounded-sm hover:bg-red-800 transition-all transform hover:-translate-y-1">
-                            Explore
-                        </a>
+                        <a href="https://www.thepreserveri.com/resort-spa/experiences/golf/" target="_blank" class="mt-8 px-10 py-4 bg-red-700 text-white text-[10px] font-bold uppercase tracking-[0.4em] rounded-sm hover:bg-red-800 transition-all transform hover:-translate-y-1">Explore</a>
                     </div>
                     <div class="flex flex-col items-center">
                         <h3 class="text-3xl font-normal uppercase mb-8 tracking-widest font-marcellus text-red-700">The Prize</h3>
-                        <p class="text-white/60 leading-relaxed font-light uppercase text-xs tracking-[0.2em] max-w-[280px]">$100,000 winner's share of the purse and a host of other prizes available</p>
-                        <a href="#" class="mt-8 px-10 py-4 bg-red-700 text-white text-[10px] font-bold uppercase tracking-[0.4em] rounded-sm hover:bg-red-800 transition-all transform hover:-translate-y-1">
-                            PRIZES
-                        </a>
+                        <a href="#" class="mt-8 px-10 py-4 bg-red-700 text-white text-[10px] font-bold uppercase tracking-[0.4em] rounded-sm hover:bg-red-800 transition-all transform hover:-translate-y-1">PRIZES</a>
                     </div>
                 </div>
             </div>
         </section>
 
-       <footer class="bg-neutral-950 py-32 px-8 border-t border-white/5 flex flex-col items-center">
-            <div class="flex flex-col items-center gap-4 mb-16">
+        <footer class="bg-neutral-950 py-32 px-8 border-t border-white/5 flex flex-col items-center">
+            <div class="flex flex-col items-center gap-6 mb-16">
                 <div class="flex items-center gap-12">
-                    <a href="index.html" class="group">
-                        <img src="Logo.jpg" alt="The National 3 Logo" class="header-logo opacity-80 group-hover:opacity-100 transition-opacity" onerror="this.src='https://images.unsplash.com/photo-1535131749006-b7f58c99034b?q=80&w=200&auto=format&fit=crop'">
+                    <a href="index.html" class="block hover:opacity-100 opacity-80 transition-opacity">
+                        <img src="Logo.jpg" alt="The National 3 Logo" class="header-logo" onerror="this.src='https://images.unsplash.com/photo-1535131749006-b7f58c99034b?q=80&w=200&auto=format&fit=crop'">
                     </a>
-                    <a href="https://club9golf.com" target="_blank" class="group">
-                        <img src="Club9_Logo.png" alt="Club9 Logo" class="h-10 w-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity">
+                    <a href="https://club9golf.com" target="_blank" class="block hover:opacity-100 opacity-80 transition-opacity">
+                        <img src="Club9_Logo.png" alt="Club9 Logo" class="h-10 w-auto object-contain">
                     </a>
                 </div>
                 <span class="text-[9px] font-bold uppercase tracking-[0.4em] text-white/30">A Club9 event</span>
             </div>
-
             <div class="flex flex-wrap justify-center gap-14 mb-20">
                 <a href="#event" class="text-white/30 hover:text-red-800 transition-colors text-[9px] font-bold uppercase tracking-[0.5em]">The Event</a>
                 <a href="https://club9golf.com" target="_blank" class="text-white/30 hover:text-red-800 transition-colors text-[9px] font-bold uppercase tracking-[0.5em]">Club9</a>
@@ -264,25 +244,8 @@
     </main>
 
     <script>
-        // FORCED SCROLL TOP LOGIC
-        if (history.scrollRestoration) {
-            history.scrollRestoration = 'manual';
-        }
-
+        if (history.scrollRestoration) { history.scrollRestoration = 'manual'; }
         window.scrollTo(0, 0);
-
-        window.addEventListener('pageshow', (event) => {
-            window.scrollTo(0, 0);
-        });
-
-        window.onbeforeunload = function () {
-            window.scrollTo(0, 0);
-        }
-
-        window.addEventListener('load', () => {
-            window.scrollTo(0, 0);
-            ScrollTrigger.refresh();
-        });
 
         gsap.registerPlugin(ScrollTrigger);
 
@@ -299,7 +262,6 @@
 
         gsap.set(revealLayer, { autoAlpha: 0, pointerEvents: "none" });
         gsap.set(heroLayer, { autoAlpha: 1, pointerEvents: "auto" });
-        gsap.set(zoomUnit, { scale: 1, autoAlpha: 1 });
 
         const tl = gsap.timeline({
             scrollTrigger: {
@@ -316,33 +278,10 @@
             }
         });
 
-        tl.fromTo(zoomUnit, 
-            { scale: 1, autoAlpha: 1 }, 
-            {
-                scale: 85,
-                autoAlpha: 0,
-                ease: "power2.in",
-                force3D: true,
-                duration: 1
-            }, 0);
-
-        tl.to(scrollIndicator, {
-            autoAlpha: 0,
-            y: 30,
-            duration: 0.2
-        }, 0);
-
-        tl.to(heroLayer, {
-            autoAlpha: 0,
-            pointerEvents: "none",
-            duration: 0.4
-        }, 0.5); 
-
-        tl.to(revealLayer, {
-            autoAlpha: 1,
-            pointerEvents: "auto",
-            duration: 0.4
-        }, 0.6); 
+        tl.fromTo(zoomUnit, { scale: 1, autoAlpha: 1 }, { scale: 85, autoAlpha: 0, ease: "power2.in", duration: 1 }, 0);
+        tl.to(scrollIndicator, { autoAlpha: 0, y: 30, duration: 0.2 }, 0);
+        tl.to(heroLayer, { autoAlpha: 0, pointerEvents: "none", duration: 0.4 }, 0.5); 
+        tl.to(revealLayer, { autoAlpha: 1, pointerEvents: "auto", duration: 0.4 }, 0.6); 
 
         window.addEventListener('scroll', () => {
             const scrollY = window.scrollY;
@@ -357,12 +296,8 @@
                     el.classList.remove('text-white/40');
                     el.classList.add('text-neutral-400');
                 });
-                
                 const btn = navbar.querySelector('.nav-btn');
-                if(btn) {
-                    btn.classList.replace('bg-white', 'bg-red-900');
-                    btn.classList.replace('text-neutral-900', 'text-white');
-                }
+                if(btn) { btn.classList.replace('bg-white', 'bg-red-900'); btn.classList.replace('text-neutral-900', 'text-white'); }
             } else {
                 navbar.classList.remove('bg-white/95', 'shadow-lg', 'py-2');
                 navbar.classList.add('bg-transparent', 'py-6');
@@ -374,34 +309,25 @@
                     el.classList.remove('text-neutral-400');
                     el.classList.add('text-white/40');
                 });
-                
                 const btn = navbar.querySelector('.nav-btn');
-                if(btn) {
-                    btn.classList.replace('bg-red-900', 'bg-white');
-                    btn.classList.replace('text-white', 'text-neutral-900');
-                }
+                if(btn) { btn.classList.replace('bg-red-900', 'bg-white'); btn.classList.replace('text-white', 'text-neutral-900'); }
             }
         });
 
-        // Updated toggle logic to manage visibility classes
+        // RE-ENGINEERED TOGGLE LOGIC
         const toggleMenu = (open) => {
             if (open) {
-                mobileMenu.classList.remove('invisible');
+                mobileMenu.style.display = "flex"; // Add to layout
+                // Force a browser reflow before starting animation
+                mobileMenu.offsetHeight; 
+                mobileMenu.style.transition = "transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)";
                 mobileMenu.style.transform = "translateX(0)";
-                gsap.from(mobileLinks, {
-                    y: 40,
-                    opacity: 0,
-                    stagger: 0.1,
-                    delay: 0.3,
-                    ease: "power3.out"
-                });
+                gsap.from(mobileLinks, { y: 40, opacity: 0, stagger: 0.1, delay: 0.3, ease: "power3.out" });
             } else {
                 mobileMenu.style.transform = "translateX(100%)";
-                // Delay adding invisible until transition finishes
                 setTimeout(() => {
-                    if (mobileMenu.style.transform === "translateX(100%)") {
-                        mobileMenu.classList.add('invisible');
-                    }
+                    mobileMenu.style.display = "none"; // Remove from layout
+                    mobileMenu.style.transition = "none"; // Reset transition
                 }, 700);
             }
         };
