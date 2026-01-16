@@ -33,7 +33,6 @@
         ::selection { background: #7f1d1d; color: white; }
         .nav-transition { transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1); }
         .header-logo { height: 40px; width: 40px; object-fit: cover; border-radius: 9999px; border: 1px solid rgba(255, 255, 255, 0.2); }
-        .logo-link { text-decoration: none; color: inherit; }
         input[type="range"] { -webkit-appearance: none; width: 100%; background: transparent; }
         input[type="range"]::-webkit-slider-runnable-track { width: 100%; height: 2px; background: rgba(255, 255, 255, 0.1); border-radius: 2px; }
         input[type="range"]::-webkit-slider-thumb {
@@ -42,11 +41,14 @@
             box-shadow: 0 0 10px rgba(185, 28, 28, 0.5); transition: all 0.3s ease;
         }
         input[type="range"]:active::-webkit-slider-thumb { transform: scale(1.2); background: #ef4444; }
+
+        /* Flicker Fix: Hide mobile menu from layout by default */
+        #mobile-menu { display: none; }
     </style>
 </head>
 <body class="font-urbanist bg-neutral-950">
 
-    <div id="mobile-menu" class="fixed inset-0 z-[150] bg-neutral-950 flex flex-col items-center justify-center translate-x-full transition-transform duration-700 ease-in-out">
+    <div id="mobile-menu" class="fixed inset-0 z-[150] bg-neutral-950 flex flex-col items-center justify-center translate-x-full">
         <button id="close-menu" class="absolute top-8 right-8 text-white hover:text-red-700 transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
@@ -60,15 +62,15 @@
 
     <nav id="navbar" class="fixed w-full z-[100] nav-transition py-6 px-6 bg-neutral-950/80 backdrop-blur-md border-b border-white/5">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <a href="index.html" class="logo-link flex flex-col items-start gap-1 group">
-                <div class="flex items-center gap-4">
+            <div class="flex flex-col items-start gap-1">
+                <a href="index.html" class="flex items-center gap-4 group">
                     <img src="Logo.jpg" alt="Logo" class="header-logo group-hover:border-red-700 transition-colors" onerror="this.src='https://images.unsplash.com/photo-1535131749006-b7f58c99034b?q=80&w=200&auto=format&fit=crop'">
-                    <span class="text-xl font-medium tracking-[0.2em] uppercase font-marcellus text-white transition-colors group-hover:text-red-700">
+                    <span class="text-xl font-medium tracking-[0.2em] uppercase font-marcellus text-white group-hover:text-red-700 transition-colors">
                         The National <span class="text-red-700">3</span>
                     </span>
-                </div>
-                <span class="text-[8px] font-bold uppercase tracking-[0.4em] text-white/40 ml-14 group-hover:text-neutral-400">A Club9 event</span>
-            </a>
+                </a>
+                <span class="text-[8px] font-bold uppercase tracking-[0.4em] text-white/40 ml-14">A Club9 event</span>
+            </div>
 
             <div class="hidden md:flex items-center gap-10">
                 <a href="index.html" class="text-[10px] font-bold uppercase tracking-[0.3em] text-white hover:opacity-50 transition-all">Home</a>
@@ -82,13 +84,11 @@
         </div>
     </nav>
 
-    <main class="pt-64 pb-32 px-8">
+    <main class="pt-48 pb-32 px-6">
         <div class="max-w-3xl mx-auto">
             <div class="text-center mb-20">
                 <span class="text-[10px] font-bold text-red-700 uppercase tracking-[0.6em] mb-4 block">Player Information</span>
-                <a href="index.html" class="logo-link inline-block">
-                    <h1 class="text-5xl md:text-7xl font-marcellus uppercase text-white tracking-tight mb-6 leading-tight hover:text-red-700 transition-colors">PROVE YOUR PAR 3 MASTERY</h1>
-                </a>
+                <h1 class="text-6xl md:text-7xl font-marcellus uppercase text-white tracking-tight mb-6 leading-tight">PROVE YOUR PAR 3 MASTERY</h1>
                 <p class="text-white/40 font-light leading-loose text-sm uppercase tracking-widest max-w-xl mx-auto">The National 3 field will consist of invitationals and qualifiers. Sign up below for correspondence.</p>
             </div>
 
@@ -120,34 +120,28 @@
             </form>
         </div>
 
-        <footer class="mt-48 bg-neutral-950 py-32 px-8 border-t border-white/5 flex flex-col items-center">
-            <a href="index.html" class="logo-link flex flex-col items-center gap-4 mb-16 group">
+        <footer class="mt-48 flex flex-col items-center pt-20 border-t border-white/5">
+            <div class="flex flex-col items-center gap-6 mb-16">
                 <div class="flex items-center gap-12">
-                    <img src="Logo.jpg" alt="Logo" class="header-logo opacity-80 group-hover:opacity-100 transition-opacity" onerror="this.src='https://images.unsplash.com/photo-1535131749006-b7f58c99034b?q=80&w=200&auto=format&fit=crop'">
-                    <img src="Club9_Logo.png" alt="Club9 Logo" class="h-10 w-auto object-contain" onerror="this.style.display='none'">
+                    <a href="index.html" class="block hover:opacity-100 opacity-80 transition-opacity">
+                        <img src="Logo.jpg" alt="The National 3 Logo" class="header-logo" onerror="this.src='https://images.unsplash.com/photo-1535131749006-b7f58c99034b?q=80&w=200&auto=format&fit=crop'">
+                    </a>
+                    <a href="https://club9golf.com" target="_blank" class="block hover:opacity-100 opacity-80 transition-opacity">
+                        <img src="Club9_Logo.png" alt="Club9 Logo" class="h-10 w-auto object-contain">
+                    </a>
                 </div>
-                <span class="text-[9px] font-bold uppercase tracking-[0.4em] text-white/30 group-hover:text-red-700 transition-colors">A Club9 event</span>
-            </a>
-
-            <div class="flex flex-wrap justify-center gap-14 mb-20">
-                <a href="index.html" class="text-white/30 hover:text-red-800 transition-colors text-[9px] font-bold uppercase tracking-[0.5em]">Home</a>
-                <a href="index.html#event" class="text-white/30 hover:text-red-800 transition-colors text-[9px] font-bold uppercase tracking-[0.5em]">The Event</a>
-                <a href="https://club9golf.com" target="_blank" class="text-white/30 hover:text-red-800 transition-colors text-[9px] font-bold uppercase tracking-[0.5em]">Club9</a>
+                <span class="text-[9px] font-bold uppercase tracking-[0.4em] text-white/30">A Club9 event</span>
             </div>
-            <p class="text-white/10 text-[9px] font-bold uppercase tracking-[1em]">The Preserve · Rhode Island · 2026</p>
+            <div class="flex gap-14 mb-10">
+                <a href="index.html" class="text-white/20 hover:text-red-700 transition-colors text-[9px] font-bold uppercase tracking-[0.5em]">Home</a>
+                <a href="index.html#event" class="text-white/20 hover:text-red-700 transition-colors text-[9px] font-bold uppercase tracking-[0.5em]">The Event</a>
+                <a href="https://club9golf.com" target="_blank" class="text-white/20 hover:text-red-700 transition-colors text-[9px] font-bold uppercase tracking-[0.5em]">Club9</a>
+            </div>
+            <p class="text-white/5 text-[9px] font-bold uppercase tracking-[1em]">The Preserve · Rhode Island · 2026</p>
         </footer>
     </main>
 
     <script>
-        // FORCED SCROLL TOP LOGIC
-        if (history.scrollRestoration) {
-            history.scrollRestoration = 'manual';
-        }
-        window.scrollTo(0, 0);
-        window.addEventListener('pageshow', (event) => {
-            window.scrollTo(0, 0);
-        });
-
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz17GcxGWyDS_mlz_s3Rz20J7U7xa8H9HDpP6neG4xhB7FVPhA2IiqrkMeVtyGqXYxxQg/exec';
 
         // Slider logic
@@ -157,23 +151,30 @@
             display.innerText = e.target.value + '%';
         });
 
-        // Mobile Menu
+        // Mobile Menu Toggle Logic
         const mobileMenu = document.querySelector('#mobile-menu');
+        const openMenuBtn = document.querySelector('#open-menu');
+        const closeMenuBtn = document.querySelector('#close-menu');
         const mobileLinks = document.querySelectorAll('.mobile-link');
-        
-        document.querySelector('#open-menu').addEventListener('click', () => {
-            mobileMenu.style.transform = "translateX(0)";
-        });
-        
-        document.querySelector('#close-menu').addEventListener('click', () => {
-            mobileMenu.style.transform = "translateX(100%)";
-        });
-        
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
+
+        const toggleMenu = (open) => {
+            if (open) {
+                mobileMenu.style.display = "flex";
+                mobileMenu.offsetHeight; // force reflow
+                mobileMenu.style.transition = "transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)";
+                mobileMenu.style.transform = "translateX(0)";
+            } else {
                 mobileMenu.style.transform = "translateX(100%)";
-            });
-        });
+                setTimeout(() => {
+                    mobileMenu.style.display = "none";
+                    mobileMenu.style.transition = "none";
+                }, 700);
+            }
+        };
+
+        openMenuBtn.addEventListener('click', () => toggleMenu(true));
+        closeMenuBtn.addEventListener('click', () => toggleMenu(false));
+        mobileLinks.forEach(link => link.addEventListener('click', () => toggleMenu(false)));
 
         // Form Submission
         const form = document.getElementById('apply-form');
