@@ -39,6 +39,10 @@
         #zoom-unit {
             will-change: transform, opacity;
             transform-origin: center center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
         }
         .zoom-text {
             will-change: transform, opacity;
@@ -66,6 +70,11 @@
             box-shadow: 0 0 40px rgba(0,0,0,0.5);
             will-change: transform;
         }
+        /* Ensure clickable areas don't have default link styles */
+        .logo-link {
+            text-decoration: none;
+            color: inherit;
+        }
     </style>
 </head>
 <body class="font-urbanist">
@@ -84,15 +93,15 @@
 
     <nav id="navbar" class="fixed w-full z-[100] nav-transition py-6 px-6">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex flex-col items-start gap-1">
+            <a href="index.html" class="logo-link flex flex-col items-start gap-1 group">
                 <div class="flex items-center gap-4">
-                    <img src="Logo.jpg" alt="Logo" class="header-logo" onerror="this.src='https://images.unsplash.com/photo-1535131749006-b7f58c99034b?q=80&w=200&auto=format&fit=crop'">
-                    <span class="text-xl font-medium tracking-[0.2em] uppercase font-marcellus text-white logo-text transition-colors">
+                    <img src="Logo.jpg" alt="Logo" class="header-logo group-hover:border-red-700 transition-colors" onerror="this.src='https://images.unsplash.com/photo-1535131749006-b7f58c99034b?q=80&w=200&auto=format&fit=crop'">
+                    <span class="text-xl font-medium tracking-[0.2em] uppercase font-marcellus text-white logo-text transition-colors group-hover:text-red-700">
                         The National <span class="text-red-700">3</span>
                     </span>
                 </div>
                 <span class="text-[8px] font-bold uppercase tracking-[0.4em] text-white/40 logo-subtext ml-14">A Club9 event</span>
-            </div>
+            </a>
 
             <div class="hidden md:flex items-center gap-10">
                 <a href="#event" class="text-[10px] font-bold uppercase tracking-[0.3em] text-white hover:opacity-50 transition-all nav-link">The Event</a>
@@ -119,7 +128,7 @@
                     </div>
 
                     <div class="relative z-20 h-full w-full flex flex-col items-center justify-center px-8 py-6 text-center">
-                        <div class="max-w-5xl">
+                        <a href="index.html" class="logo-link max-w-5xl block">
                             <div class="inline-flex items-center gap-3 mb-6">
                                 <div class="h-[1px] w-12 bg-red-900/20"></div>
                                 <span class="text-[10px] font-bold text-red-900 uppercase tracking-[0.4em]">2026 Inaugural</span>
@@ -129,28 +138,28 @@
                                 THE NATIONAL <span class="text-red-900">3</span>
                             </h2>
                             <p class="text-[10px] font-bold text-red-900/60 uppercase tracking-[0.6em] mb-10">A Club9 event</p>
-                            
-                            <div class="space-y-4 mb-20">
-                                <p class="text-lg md:text-2xl text-neutral-800 font-light tracking-[0.1em] uppercase">
-                                    Identify the Best Par 3 Golfer in the Country
-                                </p>
-                                <p class="text-[10px] md:text-xs text-red-900 font-bold tracking-[0.4em] uppercase">
-                                    The Preserve Sporting Club, Wyoming, Rhode Island
-                                </p>
+                        </a>
+                        
+                        <div class="space-y-4 mb-20">
+                            <p class="text-lg md:text-2xl text-neutral-800 font-light tracking-[0.1em] uppercase">
+                                Identify the Best Par 3 Golfer in the Country
+                            </p>
+                            <p class="text-[10px] md:text-xs text-red-900 font-bold tracking-[0.4em] uppercase">
+                                The Preserve Sporting Club, Wyoming, Rhode Island
+                            </p>
+                        </div>
+                        <div class="flex justify-center gap-8 md:gap-20 border-t border-neutral-100 pt-16">
+                            <div class="text-center">
+                                <p class="text-3xl md:text-4xl font-normal text-neutral-950 uppercase mb-2 font-marcellus tracking-widest">36</p>
+                                <p class="text-[8px] md:text-[9px] font-bold text-neutral-950 uppercase tracking-[0.2em] md:tracking-[0.3em]">Total Holes</p>
                             </div>
-                            <div class="flex justify-center gap-8 md:gap-20 border-t border-neutral-100 pt-16">
-                                <div class="text-center">
-                                    <p class="text-3xl md:text-4xl font-normal text-neutral-950 uppercase mb-2 font-marcellus tracking-widest">36</p>
-                                    <p class="text-[8px] md:text-[9px] font-bold text-neutral-950 uppercase tracking-[0.2em] md:tracking-[0.3em]">Total Holes</p>
-                                </div>
-                                <div class="text-center">
-                                    <p class="text-3xl md:text-4xl font-normal text-neutral-950 uppercase mb-2 font-marcellus tracking-widest">02</p>
-                                    <p class="text-[8px] md:text-[9px] font-bold text-neutral-950 uppercase tracking-[0.2em] md:tracking-[0.3em]">Full Days</p>
-                                </div>
-                                <div class="text-center">
-                                    <p class="text-3xl md:text-4xl font-normal text-neutral-950 uppercase mb-2 font-marcellus tracking-widest">$100k</p>
-                                    <p class="text-[8px] md:text-[9px] font-bold text-neutral-950 uppercase tracking-[0.2em] md:tracking-[0.3em]">Winner's Share</p>
-                                </div>
+                            <div class="text-center">
+                                <p class="text-3xl md:text-4xl font-normal text-neutral-950 uppercase mb-2 font-marcellus tracking-widest">02</p>
+                                <p class="text-[8px] md:text-[9px] font-bold text-neutral-950 uppercase tracking-[0.2em] md:tracking-[0.3em]">Full Days</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-3xl md:text-4xl font-normal text-neutral-950 uppercase mb-2 font-marcellus tracking-widest">$100k</p>
+                                <p class="text-[8px] md:text-[9px] font-bold text-neutral-950 uppercase tracking-[0.2em] md:tracking-[0.3em]">Winner's Share</p>
                             </div>
                         </div>
                     </div>
@@ -163,15 +172,15 @@
                     </div>
 
                     <div class="relative z-20 text-center px-8 flex flex-col items-center pt-32 md:pt-0">
-                        <div id="zoom-unit">
+                        <a href="index.html" id="zoom-unit" class="logo-link group">
                             <div class="mb-12 flex justify-center">
-                                <img src="Logo.jpg" alt="Tournament Logo" class="intro-logo" onerror="this.src='https://images.unsplash.com/photo-1535131749006-b7f58c99034b?q=80&w=200&auto=format&fit=crop'">
+                                <img src="Logo.jpg" alt="Tournament Logo" class="intro-logo group-hover:scale-105 transition-transform" onerror="this.src='https://images.unsplash.com/photo-1535131749006-b7f58c99034b?q=80&w=200&auto=format&fit=crop'">
                             </div>
                             <h1 id="main-title" class="zoom-text text-5xl md:text-[10rem] font-normal text-white leading-[1] uppercase tracking-tighter font-marcellus">
                                 Identify the <br />
                                 <span class="text-red-700">Best</span>
                             </h1>
-                        </div>
+                        </a>
 
                         <div id="scroll-indicator" class="mt-20">
                             <p class="text-base md:text-xl text-white/50 font-light mb-14 max-w-2xl mx-auto tracking-[0.2em] uppercase">
@@ -230,15 +239,15 @@
         </section>
 
        <footer class="bg-neutral-950 py-32 px-8 border-t border-white/5 flex flex-col items-center">
-            <div class="flex flex-col items-center gap-4 mb-16">
+            <a href="index.html" class="logo-link flex flex-col items-center gap-4 mb-16 group">
                 <div class="flex items-center gap-12">
-                    <img src="Logo.jpg" alt="The National 3 Logo" class="header-logo opacity-80" onerror="this.src='https://images.unsplash.com/photo-1535131749006-b7f58c99034b?q=80&w=200&auto=format&fit=crop'">
-                    <a href="https://club9golf.com" target="_blank" class="transition-opacity hover:opacity-70">
-                        <img src="Club9_Logo.png" alt="Club9 Logo" class="h-10 w-auto object-contain" onerror="this.style.display='none'">
-                    </a>
+                    <img src="Logo.jpg" alt="The National 3 Logo" class="header-logo opacity-80 group-hover:opacity-100 transition-opacity" onerror="this.src='https://images.unsplash.com/photo-1535131749006-b7f58c99034b?q=80&w=200&auto=format&fit=crop'">
+                    <object data="Club9_Logo.png" type="image/png" class="h-10 w-auto pointer-events-none">
+                        <img src="Club9_Logo.png" alt="Club9 Logo" class="h-10 w-auto object-contain">
+                    </object>
                 </div>
-                <span class="text-[9px] font-bold uppercase tracking-[0.4em] text-white/30">A Club9 event</span>
-            </div>
+                <span class="text-[9px] font-bold uppercase tracking-[0.4em] text-white/30 group-hover:text-red-700 transition-colors">A Club9 event</span>
+            </a>
 
             <div class="flex flex-wrap justify-center gap-14 mb-20">
                 <a href="#event" class="text-white/30 hover:text-red-800 transition-colors text-[9px] font-bold uppercase tracking-[0.5em]">The Event</a>
@@ -250,12 +259,22 @@
     </main>
 
     <script>
-        window.onbeforeunload = function () {
-            window.scrollTo(0, 0);
-        }
-
+        // FORCED SCROLL TOP LOGIC
+        // Set manual restoration immediately
         if (history.scrollRestoration) {
             history.scrollRestoration = 'manual';
+        }
+
+        // Force scroll to top on every load/reload
+        window.scrollTo(0, 0);
+
+        // Mobile browsers often need this additional event to handle the "back" button or cached reloads
+        window.addEventListener('pageshow', (event) => {
+            window.scrollTo(0, 0);
+        });
+
+        window.onbeforeunload = function () {
+            window.scrollTo(0, 0);
         }
 
         window.addEventListener('load', () => {
@@ -288,6 +307,7 @@
                 scrub: 1,
                 invalidateOnRefresh: true,
                 onUpdate: (self) => {
+                    // This creates the "refresh to start over" feel on desktop
                     if (window.innerWidth > 768 && self.direction === -1 && self.progress < 0.60) {
                         window.location.reload();
                     }
