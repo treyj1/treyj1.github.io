@@ -145,80 +145,81 @@
         </footer>
     </main>
 
-    <script>
-        // PASTE YOUR GOOGLE SCRIPT WEB APP URL BETWEEN THE QUOTES BELOW
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_Qk3IeWQeUnS1GQGIt_h2YLP8SVkEgYuscO1xBMAP4B6riBhxwrXF703yPjTS-Ouo/exec';
+   <script>
+    // Updated with your new deployment URL
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwCUB0wMS32wy7aWO1h4lSdfuxUK4KaNUJc6HVduWGp-KXN2mOpvSADuoI26dkvkhNa-g/exec';
 
-        // Slider logic
-        const slider = document.getElementById('confidence-slider');
-        const display = document.getElementById('confidence-value');
-        if (slider && display) {
-            slider.addEventListener('input', (e) => {
-                display.innerText = e.target.value + '%';
+    // Confidence Slider Logic
+    const slider = document.getElementById('confidence-slider');
+    const display = document.getElementById('confidence-value');
+    if (slider && display) {
+        slider.addEventListener('input', (e) => {
+            display.innerText = e.target.value + '%';
+        });
+    }
+
+    // Form Submission Logic
+    const form = document.getElementById('apply-form');
+    if (form) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submit-btn');
+            btn.innerText = "Transmitting...";
+            btn.disabled = true;
+
+            const payload = {
+                name: document.getElementById('player-name').value,
+                email: document.getElementById('player-email').value,
+                confidence: document.getElementById('confidence-slider').value
+            };
+
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                body: JSON.stringify(payload)
+            })
+            .then(() => {
+                form.innerHTML = `
+                    <div class="text-center py-20">
+                        <h2 class="text-4xl font-marcellus text-red-700 uppercase mb-4">Request Received</h2>
+                        <p class="text-white/40 tracking-widest uppercase text-xs leading-loose">
+                            Your information has been logged.<br>
+                            We will reach out as more details become available.
+                        </p>
+                    </div>`;
+            })
+            .catch(err => {
+                console.error('Submission error:', err);
+                btn.innerText = "Error - Try Again";
+                btn.disabled = false;
             });
+        });
+    }
+
+    // Mobile Menu logic for consistency across pages
+    const mobileMenu = document.querySelector('#mobile-menu');
+    const openMenuBtn = document.querySelector('#open-menu');
+    const closeMenuBtn = document.querySelector('#close-menu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    const toggleMenu = (open) => {
+        if (open) {
+            mobileMenu.style.display = "flex";
+            mobileMenu.offsetHeight; 
+            mobileMenu.style.transition = "transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)";
+            mobileMenu.style.transform = "translateX(0)";
+        } else {
+            mobileMenu.style.transform = "translateX(100%)";
+            setTimeout(() => {
+                mobileMenu.style.display = "none";
+                mobileMenu.style.transition = "none";
+            }, 700);
         }
+    };
 
-        // Mobile Menu Toggle logic
-        const mobileMenu = document.querySelector('#mobile-menu');
-        const openMenuBtn = document.querySelector('#open-menu');
-        const closeMenuBtn = document.querySelector('#close-menu');
-        const mobileLinks = document.querySelectorAll('.mobile-link');
-
-        const toggleMenu = (open) => {
-            if (open) {
-                mobileMenu.style.display = "flex";
-                mobileMenu.offsetHeight; 
-                mobileMenu.style.transition = "transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)";
-                mobileMenu.style.transform = "translateX(0)";
-            } else {
-                mobileMenu.style.transform = "translateX(100%)";
-                setTimeout(() => {
-                    mobileMenu.style.display = "none";
-                    mobileMenu.style.transition = "none";
-                }, 700);
-            }
-        };
-
-        if (openMenuBtn) openMenuBtn.addEventListener('click', () => toggleMenu(true));
-        if (closeMenuBtn) closeMenuBtn.addEventListener('click', () => toggleMenu(false));
-        mobileLinks.forEach(link => link.addEventListener('click', () => toggleMenu(false)));
-
-        // Form Submission Logic
-        const form = document.getElementById('apply-form');
-        if (form) {
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const btn = document.getElementById('submit-btn');
-                btn.innerText = "Transmitting...";
-                btn.disabled = true;
-
-                const payload = {
-                    name: document.getElementById('player-name').value,
-                    email: document.getElementById('player-email').value,
-                    confidence: document.getElementById('confidence-slider').value
-                };
-
-                fetch(SCRIPT_URL, {
-                    method: 'POST',
-                    body: JSON.stringify(payload)
-                })
-                .then(() => {
-                    form.innerHTML = `
-                        <div class="text-center py-20">
-                            <h2 class="text-4xl font-marcellus text-red-700 uppercase mb-4">Request Received</h2>
-                            <p class="text-white/40 tracking-widest uppercase text-xs leading-loose">
-                                Your information request was received.<br>
-                                A confirmation email has been dispatched to your inbox.
-                            </p>
-                        </div>`;
-                })
-                .catch(err => {
-                    console.error('Submission error:', err);
-                    btn.innerText = "Error - Try Again";
-                    btn.disabled = false;
-                });
-            });
-        }
-    </script>
+    if (openMenuBtn) openMenuBtn.addEventListener('click', () => toggleMenu(true));
+    if (closeMenuBtn) closeMenuBtn.addEventListener('click', () => toggleMenu(false));
+    mobileLinks.forEach(link => link.addEventListener('click', () => toggleMenu(false)));
+</script>
 </body>
 </html>
+
