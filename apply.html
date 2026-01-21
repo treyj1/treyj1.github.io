@@ -41,8 +41,6 @@
             box-shadow: 0 0 10px rgba(185, 28, 28, 0.5); transition: all 0.3s ease;
         }
         input[type="range"]:active::-webkit-slider-thumb { transform: scale(1.2); background: #ef4444; }
-
-        /* Flicker Fix: Hide mobile menu from layout by default */
         #mobile-menu { display: none; }
     </style>
 </head>
@@ -65,7 +63,7 @@
             <div class="flex flex-col items-start gap-1">
                 <a href="index.html" class="flex items-center gap-4 group">
                     <img src="Logo.jpg" alt="Logo" class="header-logo group-hover:border-red-700 transition-colors" onerror="this.src='https://images.unsplash.com/photo-1535131749006-b7f58c99034b?q=80&w=200&auto=format&fit=crop'">
-                    <span class="text-xl font-medium tracking-[0.2em] uppercase font-marcellus text-white group-hover:text-red-700 transition-colors transition-colors">
+                    <span class="text-xl font-medium tracking-[0.2em] uppercase font-marcellus text-white group-hover:text-red-700 transition-colors">
                         The National <span class="text-red-700">3</span>
                     </span>
                 </a>
@@ -148,16 +146,19 @@
     </main>
 
     <script>
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxslNFAlMYQFrNl29vLf7cbAt85DQc1Cg7Ce_8WJoSlf2ksccYfwWg4gum4RHZqPqsH/exec';
+        // PASTE YOUR GOOGLE SCRIPT WEB APP URL BETWEEN THE QUOTES BELOW
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_Qk3IeWQeUnS1GQGIt_h2YLP8SVkEgYuscO1xBMAP4B6riBhxwrXF703yPjTS-Ouo/exec';
 
         // Slider logic
         const slider = document.getElementById('confidence-slider');
         const display = document.getElementById('confidence-value');
-        slider.addEventListener('input', (e) => {
-            display.innerText = e.target.value + '%';
-        });
+        if (slider && display) {
+            slider.addEventListener('input', (e) => {
+                display.innerText = e.target.value + '%';
+            });
+        }
 
-        // Mobile Menu Toggle Logic (Synced with Index Fix)
+        // Mobile Menu Toggle logic
         const mobileMenu = document.querySelector('#mobile-menu');
         const openMenuBtn = document.querySelector('#open-menu');
         const closeMenuBtn = document.querySelector('#close-menu');
@@ -166,7 +167,7 @@
         const toggleMenu = (open) => {
             if (open) {
                 mobileMenu.style.display = "flex";
-                mobileMenu.offsetHeight; // force reflow
+                mobileMenu.offsetHeight; 
                 mobileMenu.style.transition = "transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)";
                 mobileMenu.style.transform = "translateX(0)";
             } else {
@@ -178,54 +179,46 @@
             }
         };
 
-        openMenuBtn.addEventListener('click', () => toggleMenu(true));
-        closeMenuBtn.addEventListener('click', () => toggleMenu(false));
+        if (openMenuBtn) openMenuBtn.addEventListener('click', () => toggleMenu(true));
+        if (closeMenuBtn) closeMenuBtn.addEventListener('click', () => toggleMenu(false));
         mobileLinks.forEach(link => link.addEventListener('click', () => toggleMenu(false)));
 
-        // Form Submission
+        // Form Submission Logic
         const form = document.getElementById('apply-form');
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const btn = document.getElementById('submit-btn');
-            btn.innerText = "Transmitting...";
-            btn.disabled = true;
+        if (form) {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const btn = document.getElementById('submit-btn');
+                btn.innerText = "Transmitting...";
+                btn.disabled = true;
 
-            const payload = {
-                name: document.getElementById('player-name').value,
-                email: document.getElementById('player-email').value,
-                confidence: document.getElementById('confidence-slider').value
-            };
+                const payload = {
+                    name: document.getElementById('player-name').value,
+                    email: document.getElementById('player-email').value,
+                    confidence: document.getElementById('confidence-slider').value
+                };
 
-            fetch(SCRIPT_URL, {
-                method: 'POST',
-                mode: 'no-cors', 
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            })
-            .then(() => {
-                form.innerHTML = `
-                    <div class="text-center py-20 animate-pulse">
-                        <h2 class="text-4xl font-marcellus text-red-700 uppercase mb-4">Request Received</h2>
-                        <p class="text-white/40 tracking-widest uppercase text-xs leading-loose">
-                            Your information request was received.<br>
-                            More details will be sent to your email once they become available.
-                        </p>
-                    </div>`;
-            })
-            .catch(err => {
-                console.error(err);
-                btn.innerText = "Error - Try Again";
-                btn.disabled = false;
+                fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    body: JSON.stringify(payload)
+                })
+                .then(() => {
+                    form.innerHTML = `
+                        <div class="text-center py-20">
+                            <h2 class="text-4xl font-marcellus text-red-700 uppercase mb-4">Request Received</h2>
+                            <p class="text-white/40 tracking-widest uppercase text-xs leading-loose">
+                                Your information request was received.<br>
+                                A confirmation email has been dispatched to your inbox.
+                            </p>
+                        </div>`;
+                })
+                .catch(err => {
+                    console.error('Submission error:', err);
+                    btn.innerText = "Error - Try Again";
+                    btn.disabled = false;
+                });
             });
-        });
+        }
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
